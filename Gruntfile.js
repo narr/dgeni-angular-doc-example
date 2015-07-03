@@ -46,6 +46,15 @@ module.exports = function(grunt) {
             client: 'docs/app',
             dist: 'dist_docs'
         },
+
+
+        docPath: {
+            src: 'dgeni_docs',
+            dest: 'dist_docs'
+        },
+
+
+
         // Task Config Start
         shell: getConfig('shell'),
         nodemon: getConfig('nodemon'),
@@ -106,24 +115,12 @@ module.exports = function(grunt) {
             server: '.tmp'
         },
 
-        // Renames files for browser caching purposes
-        filerev: {
-            css: {
-                src: [
-                    '<%= yeoman.dist %>/public/{,*/}*.js',
-                    '<%= yeoman.dist %>/public/{,*/}*.css',
-                    '<%= yeoman.dist %>/public/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                    '<%= yeoman.dist %>/public/assets/fonts/*',
-                    '<%= yeoman.dist %>/public/bower_components/font-awesome/fonts/*'
-                ]
-            }
-        },
+
 
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: getConfig('usemin').useminPrepare,
-
 
 
         // Performs rewrites based on filerev and the useminPrepare configuration
@@ -165,77 +162,14 @@ module.exports = function(grunt) {
             }
         },
 
-        // Copies remaining files to places other tasks can use
-        copy: {
-            // options: {
-            //     process: function (content, srcpath) { // replace authors with INNORIX
-            //         // return content.replace(/@author[\s\S]*?\n/g, '@author      INNORIX\n');
-            //         return content.replace(/@author\s*(\S[\s\S]*?\n)/g, function(match, p1) {
-            //             return match.replace(p1, "INNORIX\n");
-            //         });
-            //     }
-            // },
-            dist: {
-                files: [
-                    {
-                        expand: true,
-                        dot: true,
-                        cwd: '<%= yeoman.client %>',
-                        dest: '<%= yeoman.dist %>/public',
-                        src: [
-                            '*.{ico,png,txt}',
-                            '.htaccess',
-                            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-                            'bower_components/font-awesome/fonts/*',
-                            'assets/images/{,*/}*.{webp}',
-                            'assets/fonts/**/*',
-                            'index.html'
-                        ]
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= yeoman.client %>/assets/images',
-                        dest: '<%= yeoman.dist %>/public/assets/images',
-                        src: ['*', '!icons']
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= yeoman.client %>/.tmp/assets/images',
-                        dest: '<%= yeoman.dist %>/public/assets/images',
-                        src: ['*']
-                    },
-                    {
-                        expand: true,
-                        dest: '<%= yeoman.dist %>',
-                        src: [
-                            'package.json',
-                            'server/**/*',
-                            '!server/**/*.spec.js'
-                        ]
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= yeoman.client %>/.tmp/app',
-                        dest: '<%= yeoman.dist %>/public/app',
-                        src: '*.{css,css.map}'
-                    }
-                ]
-            },
-            styles: {
-                expand: true,
-                cwd: '<%= yeoman.client %>',
-                dest: '<%= yeoman.client %>/.tmp',
-                src: ['{app,components}/**/*.css']
-            }
-        },
 
-        cssmin: {
-            generated: {
-                options: {
-                    sourceMap: true
-                }
-            }
-        },
+        copy: getConfig('copy'),
+        filerev: getConfig('filerev'),
+
+
+
+
+
 
         uglify: {
             options: {
@@ -243,22 +177,7 @@ module.exports = function(grunt) {
             }
         },
 
-        htmlmin: {
-            dist: {
-                options: {
-                    removeComments: true,
-                    collapseWhitespace: true
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= yeoman.dist %>/public',
-                        src: ['**/*.html'],
-                        dest: '<%= yeoman.dist %>/public'
-                    }
-                ]
-            }
-        },
+        htmlmin: getConfig('htmlmin'),
 
 
         buildcontrol: {
@@ -371,52 +290,40 @@ module.exports = function(grunt) {
     ]);
 
 
-    grunt.registerTask('test', [
-        // 'ngtemplates',
-        'useminPrepare',
-         'concat:generated',
-        // 'ngAnnotate',
-        // 'copy:dist',
-         'uglify:generated',
-        // 'filerev',
-        'usemin:docClient'
-        // 'htmlmin:dist'
-    ]);
 
 
 
-
-
-
-
-
-    grunt.registerTask('doc', function(target) {
-        var tasks;
-
-        tasks = [];
-
-        if (target === 'client') {
-            grunt.task.run([
-                'mochaTest'
-            ]);
-        }
-        else if (target === 'server') {
-            grunt.task.run([
-                'clean:server',
-                'karma:client'
-            ]);
-        }
-        else {
-            grunt.task.run([
-                'test:server',
-                'test:client'
-            ]);
+    grunt.registerTask('doUsemin', function(target) {
+        var configData;
+        configData = grunt.config.data;
+        if (target === 'docNg') {
+            configData.usemin = configData.usemin[target];
         }
 
-
-        grunt.task.run(tasks);
+        if(target) {
+            grunt.task.run('usemin');
+        }
     });
 
 
+    grunt.registerTask('docNg', [
+        'copy:preDocNg',
+
+
+
+        // 'ngtemplates',
+
+        'useminPrepare:docNg',
+        'concat:generated',
+        'cssmin:generated',
+        // 'ngAnnotate',
+
+        'uglify:generated',
+
+
+        'filerev:preDocNg',
+        'doUsemin:docNg',
+        'htmlmin:docNg'
+    ]);
     // Task End
 };

@@ -21,12 +21,12 @@ gulp.task('partials:docs', ['dgeni'], function () {
 gulp.task('html:docs', ['wiredep:docs', 'partials:docs'], function () {
     var assets;
     var jsFilter = $.filter('**/*.js');
-    return gulp.src(['dgeni_docs/ng/app/index.html'])
+    return gulp.src(['dgeni_docs/ng/index.html'])
         .pipe($.inject(gulp.src('dgeni_docs/ng/app/.tmp_docs/partials/**/*.js'), {
             read: false,
-            starttag: '<!-- inject:partials -->',
-            addRootSlash: false,
-            addPrefix: '../'
+            starttag: '<!-- inject:partials -->'
+            // addRootSlash: false
+            // addPrefix: '../'
         }))
         /*
          .pipe($.inject(gulp.src('dgeni_docs/ng/app/env_*.js'), {
