@@ -8,20 +8,17 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Docs</title>
     <!-- build:css app/vendor.css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/google-code-prettify/bin/prettify.min.css">
+    <link rel="stylesheet" href=".tmp/app/vendor.css">
     <!-- endbuild -->
     <!-- build:css app/app.css -->
-    <link rel="stylesheet" href="app/styles/docs.css"/>
-    <link rel="stylesheet" href="app/styles/runnableExample.css"/>
-    <link rel="stylesheet" href="app/styles/github.css"/>
+    <link rel="stylesheet" href=".tmp/app/app.css">
     <!-- endbuild -->
 </head>
 <body ng-app="docApp">
 <!--[if lt IE 9]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
 <div class="container" ng-controller="DocsCtrl as docs">
-    <div ng-include="'src/main.html'"></div>
+    <div ng-include="'app/main/main.html'"></div>
 </div>
 
 <!-- build:js app/vendor.js -->
@@ -34,13 +31,14 @@
 <!-- build:js app/app.js -->
 <!-- inject:env_ignore -->
 <!-- endinject -->
-<script src="app/src/index.js"></script>
-<script src="app/src/pre.directive.js"></script>
-<script src="app/src/a.directive.js"></script>
-<script src="app/src/docs.controller.js"></script>
-<script src="app/src/navbar.controller.js"></script>
-<script src="app/.tmp_docs/src/area-data.js"></script>
-<script src="app/.tmp_docs/src/nav-data.js"></script>
+<script src="app/app.js"></script>
+<script src=".tmp/components/data/area-data.service.js"></script>
+<script src=".tmp/components/data/nav-data.service.js"></script>
+<script src="components/prettyprint/prettyprint.directive.js"></script>
+<script src="components/a.directive.js"></script>
+<script src="components/navbar/navbar.controller.js"></script>
+<script src="app/main/main.controller.js"></script>
+<script src=".tmp/templates.js"></script>
 <!-- inject:partials -->
 <!-- angular templates will be automaticaly converted in js and inserted here -->
 <!-- endinject -->

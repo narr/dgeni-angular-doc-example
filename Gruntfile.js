@@ -65,8 +65,7 @@ module.exports = function(grunt) {
         sass: getConfig('sass'),
         // Package all the html partials into a single javascript payload
         ngtemplates: getConfig('ngtemplates'),
-        // Run some tasks in parallel
-        concurrent: getConfig('concurrent'),
+
         // Debugging with node inspector
         'node-inspector': getConfig('node-inspector'),
 
@@ -96,6 +95,9 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+
+
 
 
         // Empties folders to start fresh
@@ -200,11 +202,18 @@ module.exports = function(grunt) {
                     branch: 'master'
                 }
             }
-        }
+        },
         // ngDoc(Dgeni)(after file log and lint),
 
+
+
+
+
+
+
+        less: getConfig('less')
+
         // Task Config End
-        // grunt-contrib-less, grunt-jsdoc, grunt-env
     });
 
     // Task Start
@@ -306,24 +315,35 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('docNg', [
-        'copy:preDocNg',
 
 
 
-        // 'ngtemplates',
-
-        'useminPrepare:docNg',
-        'concat:generated',
-        'cssmin:generated',
-        // 'ngAnnotate',
-
-        'uglify:generated',
 
 
-        'filerev:preDocNg',
-        'doUsemin:docNg',
-        'htmlmin:docNg'
-    ]);
+    grunt.registerTask('docNg', function(target) {
+        var tasks;
+        if (target === 'prod') {
+
+        }
+        else {
+            tasks = [
+                'less:docNg'
+                // 'ngtemplates',
+
+                // 'useminPrepare:docNg',
+                // 'concat:generated',
+                // 'cssmin:generated',
+                // // 'ngAnnotate',
+//
+                // 'uglify:generated',
+//
+//
+                // 'filerev:preDocNg',
+                // 'doUsemin:docNg',
+                // 'htmlmin:docNg'
+            ];
+        }
+        grunt.task.run(tasks);
+    });
     // Task End
 };

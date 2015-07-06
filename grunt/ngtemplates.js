@@ -8,7 +8,7 @@ module.exports = function(grunt, config) {
     return {
         options: {
             // This should be the name of your apps angular module
-            module: 'meanChirpApp',
+            module: 'docApp',
             htmlmin: {
                 collapseBooleanAttributes: true,
                 collapseWhitespace: true,
@@ -21,13 +21,14 @@ module.exports = function(grunt, config) {
             }
             // usemin: 'app/app.js'
         },
-        tmp: {
+        docNg: {
             // This will store the template URL as {app,components}/**/*.html instead of <%= yeoman.client %>/{app,components}/**/*.html
-            cwd: '<%= yeoman.client %>',
+            cwd: '<%= docPath.src %>/ng',
             src: [
                 '{app,components}/**/*.html'
+                // '.tmp/{app,components}/**/*.html'
             ],
-            dest: '<%= yeoman.client %>/.tmp/app/templates.js'
+            dest: '<%= docPath.src %>/ng/.tmp/templates.js'
         }
     };
 };
