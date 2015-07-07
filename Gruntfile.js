@@ -164,7 +164,7 @@ module.exports = function(grunt) {
             }
         },
 
-
+        dgeni: getConfig('dgeni'),
         copy: getConfig('copy'),
         filerev: getConfig('filerev'),
 
@@ -313,6 +313,18 @@ module.exports = function(grunt) {
             grunt.task.run('usemin');
         }
     });
+
+
+    grunt.registerTask('doDgeni', function(target) {
+        var done = this.async();
+        grunt.config.data.dgeni.generate(target).then(function() {
+            done();
+        });
+    });
+
+
+    grunt.registerTask('docNgTemplates', ['copy:docNgTemplates', 'ngtemplates:docNg']);
+
 
 
 

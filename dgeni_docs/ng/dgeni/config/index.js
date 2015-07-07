@@ -1,15 +1,10 @@
-// Canonical path provides a consistent path (i.e. always forward slashes) across different OSes
-
-var _ = require('lodash');
-
-
-var path = require('canonical-path');
+'use strict';
 
 var Package = require('dgeni').Package;
+// Canonical path provides a consistent path (i.e. always forward slashes) across different OSs
+var path = require('canonical-path');
 
-
-// Create and export a new Dgeni package called dgeni-example. This package depends upon
-// the jsdoc and nunjucks packages defined in the dgeni-packages npm module.
+// Create and export a new Dgeni package called dgeni-ngdoc-example.
 module.exports = new Package('dgeni-ngdoc-example',
     [
         // require('dgeni-packages/jsdoc'),
@@ -27,17 +22,20 @@ module.exports = new Package('dgeni-ngdoc-example',
         log.level = 'info';
 
         // Specify the base path used when resolving relative paths to source and output files
-        readFilesProcessor.basePath = path.resolve(__dirname, '../../..');
+        readFilesProcessor.basePath = path.resolve(__dirname, '../../../..');
 
         // Specify collections of source files that should contain the documentation to extract
-        readFilesProcessor.sourceFiles = [{
-            include: 'src/**/*.js',
-            //exclude: 'src/do-not-read.js',
-            basePath: 'src'
-        }, {
-            include: 'dgeni_docs/ng/content/**/*.ngdoc',
-            basePath: 'dgeni_docs/ng/content'
-        }];
+        readFilesProcessor.sourceFiles = [
+            {
+                include: 'src/**/*.js',
+                //exclude: 'src/do-not-read.js',
+                basePath: 'src'
+            },
+            {
+                include: 'dgeni_docs/ng/dgeni/content/**/*.ngdoc',
+                basePath: 'dgeni_docs/ng/dgeni/content'
+            }
+        ];
 
         // Add a folder to search for our own templates to use when rendering docs
         templateFinder.templateFolders.unshift(path.resolve(__dirname, 'templates'));
@@ -47,7 +45,7 @@ module.exports = new Package('dgeni-ngdoc-example',
         //templateFinder.templatePatterns.unshift('common.template.html');
 
         // Specify where the writeFilesProcessor will write our generated doc files
-        writeFilesProcessor.outputFolder = path.normalize(__dirname + '/../app/.tmp_docs');
+        writeFilesProcessor.outputFolder = path.normalize(__dirname + '/../../.tmp');
     })
     .config(function(renderDocsProcessor) {
         renderDocsProcessor.extraData.git = {
@@ -62,11 +60,17 @@ module.exports = new Package('dgeni-ngdoc-example',
     })
     .config(function(computePathsProcessor, computeIdsProcessor) {
         computePathsProcessor.pathTemplates.push({
+            docTypes: ['provider', 'service', 'directive', 'input', 'object', 'function', 'filter', 'type' ],
+            pathTemplate: '${area}/${module}/${docType}/${name}',
+            outputPathTemplate: 'app/partials/${area}/${module}/${docType}/${name}.html'
+        });
+
+        computePathsProcessor.pathTemplates.push({
             docTypes: ['module'],
             getPath: function(doc) {
                 return doc.area + '/' + doc.name;
             },
-            outputPathTemplate: 'partials/${path}.html'
+            outputPathTemplate: 'app/partials/${path}.html'
         });
 
         computePathsProcessor.pathTemplates.push({
@@ -80,13 +84,13 @@ module.exports = new Package('dgeni-ngdoc-example',
                 }
                 return docPath;
             },
-            outputPathTemplate: 'partials/${path}.html'
+            outputPathTemplate: 'app/partials/${path}.html'
         });
 
         computePathsProcessor.pathTemplates.push({
             docTypes: ['componentGroup'],
             pathTemplate: '${area}/${moduleName}/${groupType}',
-            outputPathTemplate: 'partials/${area}/${moduleName}/${groupType}.html'
+            outputPathTemplate: 'app/partials/${area}/${moduleName}/${groupType}.html'
         });
 
         computeIdsProcessor.idTemplates.push({
@@ -97,5 +101,18 @@ module.exports = new Package('dgeni-ngdoc-example',
             getAliases: function(doc) {
                 return [doc.id];
             }
+        });
+
+        computePathsProcessor.pathTemplates.push({
+            docTypes: ['example'],
+            pathTemplate: 'examples/${example.id}',
+            outputPathTemplate: 'examples/${example.id}/index${deploymentQualifier}.html'
+        });
+
+        computePathsProcessor.pathTemplates.push({ // manifest.json, script.js
+            docTypes: ['example-file'],
+            getPath: function() {
+            },
+            outputPathTemplate: 'examples/${id}'
         });
     });

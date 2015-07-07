@@ -22,11 +22,11 @@ module.exports = function(grunt, config) {
             // usemin: 'app/app.js'
         },
         docNg: {
-            // This will store the template URL as {app,components}/**/*.html instead of <%= yeoman.client %>/{app,components}/**/*.html
-            cwd: '<%= docPath.src %>/ng',
+            // This will store the template URL as {app,components}/**/*.html
+            cwd: '<%= docPath.src %>/ng/.tmp',
             src: [
-                '{app,components}/**/*.html'
-                // '.tmp/{app,components}/**/*.html'
+                'app/{main,partials}/**/*.html',
+                'components/**/*.html'
             ],
             dest: '<%= docPath.src %>/ng/.tmp/templates.js'
         }

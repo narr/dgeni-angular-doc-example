@@ -11,6 +11,9 @@ module.exports = function(grunt, config) {
         },
         startServer: {
             command: 'node server/app.js'
+        },
+        docNgBower: {
+            command: 'init npm install && bower install'
         }
     };
 };

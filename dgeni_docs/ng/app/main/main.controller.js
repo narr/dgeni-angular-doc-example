@@ -33,7 +33,7 @@ angular.module('docApp').controller('DocsCtrl', function($scope, $location, DOCS
         if (!newPath.match(/\.html$/)) {
             newPath = newPath + '.html';
         }
-        newPath = 'partials/' + newPath;
+        newPath = 'app/partials/' + newPath;
 
         // console.log(newPath, hash);
 

@@ -37,13 +37,13 @@ angular.module('dgeniNgdocExample').provider('message', function(){
      * @ngdoc service
      * @name message
      * @module dgeniNgdocExample
-     * 
+     *
      * @description
      *
      * This service provides messages to your app.
      *
      * @example
-   <example module="messageExample" deps="" animate="false">
+   <example module="messageExample" deps="null" animate="false">
       <file name="index.html">
         <div ng-controller="ExampleController as example">
           messages: {{example.msg}}

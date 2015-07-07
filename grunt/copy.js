@@ -7,6 +7,14 @@
 module.exports = function(grunt, config) {
 
     return {
+        docNgTemplates: {
+            expand: true,
+            cwd: '<%= docPath.src %>/ng',
+            src: ['{app,components}/**/*.html'],
+            dest: '<%= docPath.src %>/ng/.tmp'
+        },
+
+
         preDocNg: {
             files: [
                 {
