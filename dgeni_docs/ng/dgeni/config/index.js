@@ -28,7 +28,7 @@ module.exports = new Package('dgeni-ngdoc-example',
         readFilesProcessor.sourceFiles = [
             {
                 include: 'src/**/*.js',
-                //exclude: 'src/do-not-read.js',
+                exclude: 'src/bower_components/**/*',
                 basePath: 'src'
             },
             {

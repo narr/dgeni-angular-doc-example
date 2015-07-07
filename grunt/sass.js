@@ -5,6 +5,7 @@
 'use strict';
 
 module.exports = function(grunt, config) {
+
     return {
         options: {
             sourceMap: true,

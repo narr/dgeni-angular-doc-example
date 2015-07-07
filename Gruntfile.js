@@ -315,6 +315,15 @@ module.exports = function(grunt) {
     });
 
 
+
+
+
+
+
+
+
+    grunt.registerTask('docNgCss', ['copy:docNgAssets', 'less:docNg']);
+
     grunt.registerTask('doDgeni', function(target) {
         var done = this.async();
         grunt.config.data.dgeni.generate(target).then(function() {
@@ -322,14 +331,7 @@ module.exports = function(grunt) {
         });
     });
 
-
     grunt.registerTask('docNgTemplates', ['copy:docNgTemplates', 'ngtemplates:docNg']);
-
-
-
-
-
-
 
 
     grunt.registerTask('docNg', function(target) {
@@ -339,8 +341,9 @@ module.exports = function(grunt) {
         }
         else {
             tasks = [
-                'less:docNg'
-                // 'ngtemplates',
+                'docNgCss',
+                'doDgeni',
+                'docNgTemplates'
 
                 // 'useminPrepare:docNg',
                 // 'concat:generated',

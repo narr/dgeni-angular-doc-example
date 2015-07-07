@@ -5,8 +5,6 @@
 'use strict';
 
 module.exports = function(grunt, config) {
-
-
     var _ = require('lodash');
     var Dgeni = require('dgeni');
 

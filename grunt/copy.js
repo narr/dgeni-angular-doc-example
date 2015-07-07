@@ -7,6 +7,23 @@
 module.exports = function(grunt, config) {
 
     return {
+        docNgAssets: {
+            files: [
+                {
+                    expand: true,
+                    flatten: true,
+                    cwd: '<%= docPath.src %>/ng/bower_components',
+                    src: [
+                        'bootstrap/fonts/*'
+                    ],
+                    dest: '<%= docPath.src %>/ng/.tmp/assets/fonts'
+
+
+                }
+            ]
+        },
+
+
         docNgTemplates: {
             expand: true,
             cwd: '<%= docPath.src %>/ng',
