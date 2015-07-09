@@ -1,7 +1,6 @@
 {
     "name": "dgeni-ng-doc-target",
     "dependencies": {
-        "modernizr": "~2.8.3",
         "bootstrap": "~3.3.5",
         "angular": "~1.4.2",
         "angular-route": "~1.4.2"
