@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dgeniNgdocExample')
+angular.module('dgeniNgDocTarget')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       {

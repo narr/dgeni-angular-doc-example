@@ -3,7 +3,7 @@
 /**
  *
  * @ngdoc provider
- * @module dgeniNgdocExample
+ * @module dgeniNgDocTarget
  * @name messageProvider
  *
  * @description
@@ -14,7 +14,7 @@
  *
  *
  **/
-angular.module('dgeniNgdocExample').provider('message', function(){
+angular.module('dgeniNgDocTarget').provider('message', function(){
   var repos = {};
   return {
 
@@ -36,7 +36,7 @@ angular.module('dgeniNgdocExample').provider('message', function(){
     /**
      * @ngdoc service
      * @name message
-     * @module dgeniNgdocExample
+     * @module dgeniNgDocTarget
      *
      * @description
      *
@@ -50,7 +50,7 @@ angular.module('dgeniNgdocExample').provider('message', function(){
         </div>
       </file>
        <file name="script.js">
-        angular.module('messageExample', ['dgeniNgdocExample'])
+        angular.module('messageExample', ['dgeniNgDocTarget'])
         .config(function (messageProvider) {
           messageProvider.put('msg01', 'Hello, world!');
         })

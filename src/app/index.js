@@ -3,15 +3,15 @@
 /**
  *
  * @ngdoc module
- * @name dgeniNgdocExample
- * @module dgeniNgdocExample
+ * @name dgeniNgDocTarget
+ * @module dgeniNgDocTarget
  * @packageName dgeni-ngdoc-example
  * @description
  *
  * This is a ngdoc example application module.
  *
  **/
-angular.module('dgeniNgdocExample', ['ngRoute'])
+angular.module('dgeniNgDocTarget', ['ngRoute'])
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {

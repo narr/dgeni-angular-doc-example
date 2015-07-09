@@ -6,7 +6,7 @@
  * @ngdoc directive
  * @name awesome
  * @restrict E
- * @module dgeniNgdocExample
+ * @module dgeniNgDocTarget
  *
  * @description
  *
@@ -20,14 +20,14 @@
         </div>
     </file>
     <file name="script.js">
-        angular.module('awsomeExample', ['dgeniNgdocExample']).controller('ExampleController', function() {
+        angular.module('awsomeExample', ['dgeniNgDocTarget']).controller('ExampleController', function() {
         var example = this;
     });
     </file>
 </example>
  *
  **/
-angular.module('dgeniNgdocExample').directive('awesome', function() {
+angular.module('dgeniNgDocTarget').directive('awesome', function() {
     return {
         restrict: 'E',
         template: '<div class="awesome">This is an Awesome!</div>'
