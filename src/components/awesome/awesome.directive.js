@@ -33,3 +33,6 @@ angular.module('dgeniNgDocTarget').directive('awesome', function() {
         template: '<div class="awesome">This is an Awesome!</div>'
     };
 });
+
+
+// TODO: install ngix, tag info
