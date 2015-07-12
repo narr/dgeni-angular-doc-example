@@ -57,31 +57,17 @@ module.exports = function(grunt) {
 
         // Task Config Start
         shell: getConfig('shell'),
-        nodemon: getConfig('nodemon'),
         watch: getConfig('watch'),
         // converting a set of images into a spritesheet and corresponding CSS variables
         sprite: getConfig('sprite'),
-        // Compiles Sass to CSS
-        sass: getConfig('sass'),
         // Package all the html partials into a single javascript payload
         ngtemplates: getConfig('ngtemplates'),
-
-        // Debugging with node inspector
-        'node-inspector': getConfig('node-inspector'),
-
 
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint: getConfig('jshint'),
         jscs: getConfig('jscs'),
         // Client Test settings
         karma: getConfig('karma'),
-
-        mochaTest: {
-            options: {
-                reporter: 'spec'
-            },
-            src: ['server/**/*.spec.js']
-        },
 
         protractor: {
             options: {
@@ -135,17 +121,6 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= yeoman.client %>/assets/images',
                     src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= yeoman.dist %>/public/assets/images'
-                }]
-            }
-        },
-
-        svgmin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.client %>/assets/images',
-                    src: '{,*/}*.svg',
                     dest: '<%= yeoman.dist %>/public/assets/images'
                 }]
             }

@@ -40,7 +40,6 @@
         "karma-phantomjs-launcher": "^0.1.4",
         "lodash": "^2.4.1",
         "logfile-grunt": "^0.2.0",
-        "main-bower-files": "^2.0.0",
         "time-grunt": "^1.2.1"
     },
     "engines": {

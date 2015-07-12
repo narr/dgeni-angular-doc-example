@@ -5,14 +5,26 @@
 'use strict';
 
 module.exports = function(grunt, config) {
+
     var _ = require('lodash');
     var Dgeni = require('dgeni');
 
-    var bowerFiles = require('../dgeni_docs/ng/dgeni/lib/bowerCommonFiles')({
-        base: '../bower_components',
-        exclude: [/bootstrap.js/],
-        bowerJson: require('../bower.json')
-    });
+
+    //var bowerFiles = require('../dgeni_docs/ng/dgeni/lib/bowerCommonFiles')({
+    //    base: 'src/bower_components',
+    //    exclude: [/bootstrap.js/],
+    //    bowerJson: 'src/bower.json'
+    //});
+
+    var bowerFiles = {
+        scripts: [
+            "../../common/bower_components/angular/angular.js",
+            "../../common/bower_components/angular-route/angular-route.js"
+        ],
+        stylesheets: [
+            "../../common/bower_components/bootstrap/dist/css/bootstrap.css"
+        ]
+    };
 
     var deployment = {
         name: 'default',
