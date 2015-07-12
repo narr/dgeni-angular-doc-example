@@ -4,7 +4,7 @@
  * @ngdoc module
  * @name dgeniNgDocTarget
  * @module dgeniNgDocTarget
- * @packageName dgeni-ng-doc-target.app
+ * @packageName dgeni-ng-doc-target
  * @description
  * This is a ng doc target application module.
  **/
@@ -20,7 +20,7 @@ angular.module('dgeniNgDocTarget', ['ngRoute'])
         $routeProvider
             .when('/', {
                 templateUrl: 'app/main/main.html',
-                controller: 'MainCtrl'
+                controller: 'MainCtrl as main'
             })
             .otherwise({
                 redirectTo: '/'
