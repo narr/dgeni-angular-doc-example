@@ -7,7 +7,7 @@
  * This is a ng doc target application module.
  */
 angular.module('dgeniNgDocTarget', ['ngRoute', 'ui.bootstrap'])
-    .config(function($locationProvider, $routeProvider) {
+    .config(function($locationProvider, $routeProvider, messageProvider) {
         'use strict';
 
         // $locationProvider.hashPrefix('!'); // no HTML5 Mode
@@ -25,4 +25,6 @@ angular.module('dgeniNgDocTarget', ['ngRoute', 'ui.bootstrap'])
             .otherwise({
                 redirectTo: '/'
             });
+
+        messageProvider.put('msg1', '\'Allo, \'Allo!!');
     });

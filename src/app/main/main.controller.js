@@ -1,5 +1,5 @@
 angular.module('dgeniNgDocTarget')
-    .controller('MainCtrl', function($modal, $log) {
+    .controller('MainCtrl', function($modal, $log, message) {
         'use strict';
 
         var that = this;
@@ -80,4 +80,6 @@ angular.module('dgeniNgDocTarget')
                 $log.info('Modal dismissed at: %s and reason: %s', new Date(), reason);
             });
         };
+
+        that.yeomanMsg = message.get('msg1');
     });
