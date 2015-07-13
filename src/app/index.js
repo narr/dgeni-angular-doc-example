@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc module
  * @name dgeniNgDocTarget
@@ -7,9 +5,11 @@
  * @packageName dgeni-ng-doc-target
  * @description
  * This is a ng doc target application module.
- **/
-angular.module('dgeniNgDocTarget', ['ngRoute'])
+ */
+angular.module('dgeniNgDocTarget', ['ngRoute', 'ui.bootstrap'])
     .config(function($locationProvider, $routeProvider) {
+        'use strict';
+
         // $locationProvider.hashPrefix('!'); // no HTML5 Mode
         $locationProvider.html5Mode({
             enabled: true,

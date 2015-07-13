@@ -1,5 +1,3 @@
-'use strict';
-
 // example tag deps attr means that Copy in any dependencies for this example
 
 /**
@@ -26,8 +24,10 @@
     </file>
 </example>
  *
- **/
+ */
 angular.module('dgeniNgDocTarget').directive('awesome', function() {
+    'use strict';
+
     return {
         restrict: 'E',
         template: '<div class="awesome">This is an Awesome!</div>'

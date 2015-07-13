@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('dgeniNgDocTarget')
-    .controller('MainCtrl', function() {
+    .controller('MainCtrl', function($modal, $log) {
+        'use strict';
+
         var that = this;
 
         that.awesomeThings = [
@@ -66,4 +66,18 @@ angular.module('dgeniNgDocTarget')
         angular.forEach(that.awesomeThings, function(awesomeThing) {
             awesomeThing.rank = Math.random();
         });
+
+        that.oepnModal = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'components/modal/modal.html',
+                controller: 'ModalCtrl as modal',
+                backdrop: 'static'
+            });
+
+            modalInstance.result.then(function(result) { // close
+                $log.info('Modal closed at: %s and result: %s', new Date(), result);
+            }, function(reason) { // dismiss
+                $log.info('Modal dismissed at: %s and reason: %s', new Date(), reason);
+            });
+        };
     });
