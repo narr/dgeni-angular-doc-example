@@ -1,7 +1,7 @@
 /**
  * @ngdoc provider
- * @module dgeniNgDocTarget
  * @name messageProvider
+ * @module dgeniNgDocTarget
  * @description
  * Configure messages. See also {@link message message service}.
  */
@@ -15,7 +15,7 @@ angular.module('dgeniNgDocTarget').provider('message', function messageProvider(
     /**
      * @ngdoc method
      * @name messageProvider#put
-     * @param {string} id - the message's id
+     * @param {string} id - the message's ID
      * @param {string} message - content of this message
      * @description
      * Put a message to repository. See also {@link message#get message#get}.
@@ -24,35 +24,29 @@ angular.module('dgeniNgDocTarget').provider('message', function messageProvider(
         repos[id] = message;
     };
 
-
-
-
     /**
      * @ngdoc service
      * @name message
      * @module dgeniNgDocTarget
-     *
      * @description
-     *
      * This service provides messages to your app.
-     *
      * @example
      <example module="messageExample" deps="null" animate="false">
-     <file name="index.html">
-     <div ng-controller="ExampleController as example">
-     messages: {{example.msg}}
-     </div>
-     </file>
-     <file name="script.js">
-     angular.module('messageExample', ['dgeniNgDocTarget'])
-     .config(function (messageProvider) {
-              messageProvider.put('msg01', 'Hello, world!');
-            })
-     .controller('ExampleController', function(message){
-              var example = this;
-              example.msg = message.get('msg01');
-            });
-     </file>
+         <file name="index.html">
+             <div ng-controller="ExampleController as example">
+                 messages: {{example.msg}}
+             </div>
+         </file>
+         <file name="script.js">
+             angular.module('messageExample', [])
+                 .config(function(messageProvider) {
+                     messageProvider.put('msg1', 'Hello, world!');
+                 })
+                 .controller('ExampleController', function(message) {
+                     var example = this;
+                     example.msg = message.get('msg1');
+                 });
+         </file>
      </example>
      */
     that.$get = function() {
@@ -61,13 +55,10 @@ angular.module('dgeniNgDocTarget').provider('message', function messageProvider(
             /**
              * @ngdoc method
              * @name message#get
-             *
+             * @param {string} id - A message ID
+             * @return {string} message
              * @description
              * Get a messages by ID.
-             *
-             * @param {string} id A message ID.
-             * @return {string} message
-             *
              */
             get: function(id) {
                 return repos[id];

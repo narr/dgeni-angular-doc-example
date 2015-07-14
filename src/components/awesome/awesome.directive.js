@@ -1,38 +1,29 @@
-// example tag deps attr means that Copy in any dependencies for this example
-
 /**
  * @ngdoc directive
  * @name awesome
- * @restrict E
  * @module dgeniNgDocTarget
- *
+ * @restrict A
  * @description
- *
  * It is an awesome directive.
- *
  * @example
 <example module="awsomeExample" deps="null" animate="false">
     <file name="index.html">
         <div ng-controller="ExampleController as example">
-           <awesome></awesome>
+            <div awesome></div>
         </div>
     </file>
     <file name="script.js">
-        angular.module('awsomeExample', ['dgeniNgDocTarget']).controller('ExampleController', function() {
-        var example = this;
-    });
+        angular.module('awsomeExample', []).controller('ExampleController', function() {
+            var example = this;
+        });
     </file>
 </example>
- *
  */
 angular.module('dgeniNgDocTarget').directive('awesome', function() {
     'use strict';
 
     return {
-        restrict: 'E',
+        restrict: 'A',
         template: '<div class="awesome">This is an Awesome!</div>'
     };
 });
-
-
-// TODO: install ngix, tag info
