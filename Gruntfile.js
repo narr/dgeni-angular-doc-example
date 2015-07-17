@@ -186,12 +186,24 @@ module.exports = function(grunt) {
 
 
 
-        less: getConfig('less')
+        less: getConfig('less'),
 
+
+
+
+
+
+
+
+        'http-server': getConfig('httpserver')
         // Task Config End
     });
 
     // Task Start
+    grunt.registerTask('start-src', 'Start NgDocTarget Server', ['http-server:src']);
+
+
+
     grunt.registerTask('default', function() {
         console.log(grunt.config('banner'));
     });

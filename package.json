@@ -6,7 +6,7 @@
         "url": "https://github.com/Narr-/dgeni-tempate-example.git"
     },
     "dependencies": {
-        "grunt-nginx": "^0.2.2"
+        "grunt-http-server": "^1.4.0"
     },
     "devDependencies": {
         "canonical-path": "0.0.2",
