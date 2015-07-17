@@ -4,15 +4,15 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
-
+module.exports = function() {
     return {
         options: {
             // cleancss: true, // cssmin
             // cleancssOptions: {
             //     keepBreaks: true
             // },
-            compress: true
+            compress: true,
+            sourceMap: true // /*# sourceMappingURL=http://localhost:63342/dgeni-tempate-example/dgeni_docs/ng/.tmp/app/vendor.css.map */
         },
         docNg: {
             files: [

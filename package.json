@@ -6,6 +6,8 @@
         "url": "https://github.com/Narr-/dgeni-tempate-example.git"
     },
     "dependencies": {
+        "compression": "^1.5.1",
+        "express": "^4.13.1",
         "grunt-http-server": "^1.4.0"
     },
     "devDependencies": {
@@ -31,16 +33,15 @@
         "grunt-ng-annotate": "^1.0.1",
         "grunt-protractor-runner": "^2.0.0",
         "grunt-shell": "^1.1.2",
-        "grunt-spritesmith": "^4.7.1",
         "grunt-usemin": "^3.0.0",
-        "grunt-winston": "^0.2.0",
         "jit-grunt": "^0.9.1",
         "jshint-stylish": "^0.4.0",
         "karma-jasmine": "^0.1.5",
         "karma-phantomjs-launcher": "^0.1.4",
         "lodash": "^2.4.1",
         "logfile-grunt": "^0.2.0",
-        "time-grunt": "^1.2.1"
+        "time-grunt": "^1.2.1",
+        "winston": "^1.0.1"
     },
     "engines": {
         "node": ">=0.10.0"

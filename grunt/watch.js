@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
+module.exports = function() {
 
     // to change another task's config dynamically and run task Start
     // grunt.event.on('watch', function(action, filepath, target) {

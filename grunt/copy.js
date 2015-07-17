@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
+module.exports = function() {
 
     return {
         docNgAssets: {
@@ -22,7 +22,6 @@ module.exports = function(grunt, config) {
                 }
             ]
         },
-
 
         docNgTemplates: {
             expand: true,
@@ -127,6 +126,16 @@ module.exports = function(grunt, config) {
             cwd: '<%= yeoman.client %>',
             dest: '<%= yeoman.client %>/.tmp',
             src: ['{app,components}/**/*.css']
+        },
+
+        distIndex: {
+            options: {
+                process: function (content, srcpath) {
+                    return content.replace(/<head>/, '<head><base href="/">');
+                }
+            },
+            src: '<%= docPath.src %>/ng/index.html',
+            dest: '<%= docPath.src %>/ng/index2.html'
         }
     };
 };

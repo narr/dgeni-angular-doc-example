@@ -4,8 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
-
+module.exports = function() {
     return {
         'src': {
             // the server root directory
@@ -17,17 +16,17 @@ module.exports = function(grunt, config) {
             port: 8282,
 
             // the host ip address
-            // If specified to, for example, "127.0.0.1" the server will
+            // If specified to, for example, '127.0.0.1' the server will
             // only be available on that ip.
-            // Specify "0.0.0.0" to be available everywhere
-            host: "127.0.0.1",
+            // Specify '0.0.0.0' to be available everywhere
+            host: '127.0.0.1',
 
             // cache: <sec>,
             showDir: true,
             autoIndex: true,
 
             // server default file extension
-            ext: "html",
+            ext: 'html',
 
             // specify a logger function. By default the requests are
             // sent to stdout.

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('docApp', ['ui.bootstrap'])
-    .constant('DOCS_OVERWRITELINK', typeof DOCS_OVERWRITELINK === 'undefined' ? true : DOCS_OVERWRITELINK)
+    .constant('DOCS_OVERWRITELINK', angular.element('base').length < 1)
     //.provider('DOCS_OVERWRITELINK', function(DOCS_OVERWRITELINK) {
     //    return {
     //        $get: function() {

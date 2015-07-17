@@ -1,22 +1,14 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var localConfig, logfile;
+    var logfile;
 
     function getConfig(name) {
-        return require('./grunt/' + name + '.js')(grunt, localConfig);
-    }
-
-    try {
-        // localConfig = require('./server/config/local.sample.env');
-        localConfig = require('./server/config/local.env');
-    } catch (e) {
-        localConfig = {};
+        return require('./grunt/' + name + '.js')();
     }
 
     // Load grunt tasks automatically, when needed
     require('jit-grunt')(grunt, {
-        sprite: 'grunt-spritesmith',
         ngtemplates: 'grunt-angular-templates',
         useminPrepare: 'grunt-usemin',
         protractor: 'grunt-protractor-runner',
@@ -34,32 +26,27 @@ module.exports = function(grunt) {
     grunt.initConfig({
         // Project settings
         pkg: grunt.file.readJSON('package.json'),
-        banner: '/*! <%= pkg.name || pkg.title %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.repository ? "* " + pkg.repository.url + "\\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.name %>\n' +
-        '* Licensed <%= _.map(pkg.licenses, function(val, key) {' + // lodash lib
-        '    return val.type + " " + val.url' +
-        '}).join(", ") %> */\n',
-
-        yeoman: {
-            client: 'docs/app',
-            dist: 'dist_docs'
-        },
-
-
         docPath: {
             src: 'dgeni_docs',
             dest: 'dist_docs'
         },
-
-
+        devPort: 3000,
 
         // Task Config Start
         shell: getConfig('shell'),
+        'http-server': getConfig('httpserver'),
         watch: getConfig('watch'),
-        // converting a set of images into a spritesheet and corresponding CSS variables
-        sprite: getConfig('sprite'),
+        less: getConfig('less'),
+
+
+
+
+
+
+
+        copy: getConfig('copy'),
+
+
         // Package all the html partials into a single javascript payload
         ngtemplates: getConfig('ngtemplates'),
 
@@ -83,26 +70,22 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Empties folders to start fresh
         clean: {
             dist: {
                 files: [{
                     dot: true,
                     src: [
-                        '<%= yeoman.client %>/.tmp',
-                        '<%= yeoman.dist %>/*',
-                        '!<%= yeoman.dist %>/.git*',
-                        '!<%= yeoman.dist %>/.openshift',
-                        '!<%= yeoman.dist %>/Procfile'
+                        '<%= docPath.src %>/.tmp',
+                        '<%= docPath.dest %>/*',
+                        '!<%= docPath.dest %>/.git*',
+                        '!<%= docPath.dest %>/.openshift',
+                        '!<%= docPath.dest %>/Procfile'
                     ]
                 }]
             },
             server: '.tmp'
         },
-
 
 
         // Reads HTML for usemin blocks to enable smart builds that automatically
@@ -119,9 +102,9 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.client %>/assets/images',
+                    cwd: '<%= docPath.src %>/assets/images',
                     src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= yeoman.dist %>/public/assets/images'
+                    dest: '<%= docPath.dest %>/public/assets/images'
                 }]
             }
         },
@@ -132,20 +115,16 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.client %>/.tmp/concat',
+                    cwd: '<%= docPath.src %>/.tmp/concat',
                     src: '*/**.js',
-                    dest: '<%= yeoman.client %>/.tmp/concat'
+                    dest: '<%= docPath.src %>/.tmp/concat'
                 }]
             }
         },
 
         dgeni: getConfig('dgeni'),
-        copy: getConfig('copy'),
+
         filerev: getConfig('filerev'),
-
-
-
-
 
 
         uglify: {
@@ -177,40 +156,29 @@ module.exports = function(grunt) {
                     branch: 'master'
                 }
             }
-        },
+        }
         // ngDoc(Dgeni)(after file log and lint),
 
 
 
-
-
-
-
-        less: getConfig('less'),
-
-
-
-
-
-
-
-
-        'http-server': getConfig('httpserver')
         // Task Config End
     });
 
     // Task Start
+    grunt.registerTask('default', function() {
+        console.log(grunt.config('pkg'));
+    });
+    grunt.registerTask('bower', 'install bower components', ['shell:bower']);
     grunt.registerTask('start-src', 'Start NgDocTarget Server', ['http-server:src']);
 
 
 
-    grunt.registerTask('default', function() {
-        console.log(grunt.config('banner'));
-    });
 
-    grunt.registerTask('file-log', function() {
-        logfile(grunt, {clearLogFile: true});
-    });
+
+
+
+
+
 
     grunt.registerTask('start-mongo', 'shell:startMongo');
     grunt.registerTask('dev-server', 'nodemon:dev');
@@ -231,6 +199,21 @@ module.exports = function(grunt) {
             grunt.task.run('dev-server');
         }
     });
+
+
+
+
+
+
+
+
+    grunt.registerTask('file-log', function() {
+        logfile(grunt, {clearLogFile: true});
+    });
+
+
+
+
 
     grunt.registerTask('lint', [
         'jshint',
@@ -286,9 +269,6 @@ module.exports = function(grunt) {
     ]);
 
 
-
-
-
     grunt.registerTask('doUsemin', function(target) {
         var configData;
         configData = grunt.config.data;
@@ -296,17 +276,10 @@ module.exports = function(grunt) {
             configData.usemin = configData.usemin[target];
         }
 
-        if(target) {
+        if (target) {
             grunt.task.run('usemin');
         }
     });
-
-
-
-
-
-
-
 
 
     grunt.registerTask('docNgCss', ['copy:docNgAssets', 'less:docNg']);

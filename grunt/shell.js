@@ -4,11 +4,21 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
+module.exports = function() {
     return {
-        startMongo: {
-            command: 'mongod --dbpath ' + config.MONGODB
+        bower: {
+            command: [
+                'cd src',
+                'bower install',
+                'cd ../dgeni_docs/ng',
+                'bower install',
+                'cd ../..'
+            ].join('&&')
         },
+
+
+
+
         startServer: {
             command: 'node server/app.js'
         },
