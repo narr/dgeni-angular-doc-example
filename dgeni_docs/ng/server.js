@@ -6,15 +6,15 @@ express = require('express');
 app = express();
 compression = require('compression');
 
-root = __dirname + '/ng';
+root = __dirname + '/client';
 // process.env.PORT lets the port be set by Heroku
 port = process.env.PORT || 3000;
 if (port === 3000) {
     winston = require('winston');
     winston.level = 'debug';
-    winston.add(winston.transports.File, {
-        filename: 'somefile.log'
-    });
+    // winston.add(winston.transports.File, {
+    //     filename: 'server.log'
+    // });
 }
 
 app.use(compression());
@@ -24,7 +24,6 @@ app.get('*', function(req, res) {
 });
 app.listen(port, function() {
     if (winston) {
-        console.log('Our app is running on http://localhost:' + port);
-        winston.debug('info', 'Hello from Winston!');
+        winston.debug('Our app is running on http://localhost:' + port);
     }
 });
