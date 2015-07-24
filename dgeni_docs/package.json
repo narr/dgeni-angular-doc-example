@@ -10,7 +10,6 @@
         "express": "^4.13.1"
     },
     "devDependencies": {
-        "canonical-path": "0.0.2",
         "dgeni": "^0.4.1",
         "dgeni-packages": "^0.10.7",
         "grunt": "^0.4.5",

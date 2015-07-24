@@ -169,7 +169,10 @@ module.exports = function(grunt) {
     grunt.registerTask('dgeniNg', function() {
         var dgeni, done;
         dgeni = require('./ng/dgeni/config')({
-            aa: "bb"
+            sourceFiles: { // Paths are relative to Project Root path
+                include: 'src/**/*.js',
+                exclude: 'src/bower_components/**'
+            }
         });
         done = this.async();
         dgeni.generate().then(function() {

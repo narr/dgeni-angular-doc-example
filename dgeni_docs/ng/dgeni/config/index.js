@@ -1,12 +1,12 @@
 'use strict';
 
-module.exports = function(option) {
+module.exports = function(options) {
     var Dgeni, path, pkg;
 
     Dgeni = require('dgeni');
 
     // Canonical path provides a consistent path (i.e. always forward slashes) across different OSs
-    path = require('canonical-path');
+    path = require('path');
 
     pkg = new Dgeni.Package('dgeni-ngdoc-example',
         [
@@ -14,23 +14,26 @@ module.exports = function(option) {
             require('dgeni-packages/ngdoc'),
             require('dgeni-packages/git'),
             require('dgeni-packages/nunjucks')
-            // require('dgeni-packages/examples')
+            // require('dgeni-packages/examples') // TODO Add Example
         ])
         .processor(require('./processors/navigation'))
         // Configure our dgeni package. We can ask the Dgeni dependency injector
         // to provide us with access to services and processors that we wish to configure
         .config(function(log, readFilesProcessor, templateFinder, writeFilesProcessor) {
+            var projectRootPath;
+
             // Set logging level
             log.level = 'info';
 
             // Specify the base path used when resolving relative paths to source and output files
-            readFilesProcessor.basePath = path.join(__dirname + '../../../../..');
+            projectRootPath = path.join(__dirname + '../../../../..');
+            readFilesProcessor.basePath = projectRootPath;
 
             // Specify collections of source files that should contain the documentation to extract
             readFilesProcessor.sourceFiles = [
                 {
-                    include: 'src/**/*.js',
-                    exclude: 'src/bower_components/**/*'
+                    include: options.sourceFiles.include,
+                    exclude: options.sourceFiles.exclude
                 },
                 {
                     include: 'dgeni_docs/ng/dgeni/content/**/*.ngdoc',
@@ -43,11 +46,10 @@ module.exports = function(option) {
 
             // Specify how to match docs to templates.
             // In this case we just use the same static template for all docs
-            //templateFinder.templatePatterns.unshift('common.template.html');
+            // templateFinder.templatePatterns.unshift('common.template.html');
 
             // Specify where the writeFilesProcessor will write our generated doc files
             writeFilesProcessor.outputFolder = path.join(__dirname, '../../client/.tmp');
-            // writeFilesProcessor.outputFolder = path.normalize(__dirname + '/../../client/.tmp');
         })
         .config(function(renderDocsProcessor) {
             renderDocsProcessor.extraData.git = {
@@ -135,11 +137,11 @@ module.exports = function(option) {
 
 // var bowerFiles = {
 //     scripts: [
-//         "../../common/bower_components/angular/angular.js",
-//         "../../common/bower_components/angular-route/angular-route.js"
+//         '../../common/bower_components/angular/angular.js',
+//         '../../common/bower_components/angular-route/angular-route.js'
 //     ],
 //     stylesheets: [
-//         "../../common/bower_components/bootstrap/dist/css/bootstrap.css"
+//         '../../common/bower_components/bootstrap/dist/css/bootstrap.css'
 //     ]
 // };
 
