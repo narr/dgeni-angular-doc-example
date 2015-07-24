@@ -52,29 +52,33 @@ module.exports = function(options) {
             writeFilesProcessor.outputFolder = path.join(__dirname, '../../client/.tmp');
         })
         .config(function(renderDocsProcessor) {
+            // The repository's type and url(ended with git) should be be specified in dgeni_docs's package.json
             renderDocsProcessor.extraData.git = {
                 info: {
-                    owner: 'Quramy',
-                    repo: 'dgeni-ngdocs-example'
+                    owner: options.git.info.owner,
+                    repo: options.git.info.repo
                 },
                 version: {
-                    isSnapshot: true
+                    isSnapshot: true // Branch: master
                 }
             };
         })
         .config(function(computePathsProcessor, computeIdsProcessor) {
             computePathsProcessor.pathTemplates.push({
-                docTypes: ['provider', 'service', 'directive', 'input', 'object', 'function', 'filter', 'type'],
+                docTypes: ['provider', 'service', 'filter', 'type', 'directive', 'function', 'object', 'input'],
                 pathTemplate: '${area}/${module}/${docType}/${name}',
                 outputPathTemplate: 'app/partials/${area}/${module}/${docType}/${name}.html'
             });
 
             computePathsProcessor.pathTemplates.push({
                 docTypes: ['module'],
+                // @ link path
+                // pathTemplate: '${area}/${module}',
                 getPath: function(doc) {
                     return doc.area + '/' + doc.name;
                 },
-                outputPathTemplate: 'app/partials/${path}.html'
+                // link path @
+                outputPathTemplate: 'app/partials/${path}.html' // file path
             });
 
             computePathsProcessor.pathTemplates.push({

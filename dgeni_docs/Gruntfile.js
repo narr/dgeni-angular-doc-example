@@ -179,6 +179,12 @@ module.exports = function(grunt) {
             sourceFiles: { // Paths are relative to Project Root path
                 include: 'src/**/*.js',
                 exclude: 'src/bower_components/**'
+            },
+            git: {
+                info: {
+                    owner: 'Narr-',
+                    repo: 'dgeni-tempate-example'
+                }
             }
         });
         done = this.async();
