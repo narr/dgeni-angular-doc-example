@@ -19,18 +19,17 @@ module.exports = function() {
             ]
         },
 
-
-
-
-
-
-
-        docNgTemplates: {
+        ngTemplates: {
             expand: true,
-            cwd: '<%= docPath.src %>/ng',
+            cwd: 'ng/client',
             src: ['{app,components}/**/*.html'],
-            dest: '<%= docPath.src %>/ng/.tmp'
+            dest: 'ng/client/.tmp'
         },
+
+
+
+
+
 
 
         preDocNg: {

@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config, arg) {
+module.exports = function() {
 
     return {
         useminPrepare: {

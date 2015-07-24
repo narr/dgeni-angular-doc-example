@@ -165,6 +165,13 @@ module.exports = function(grunt) {
     });
 
     // @ ng
+    grunt.registerTask('lint', [
+        'jshint',
+        'jscs'
+    ]);
+
+
+
     grunt.registerTask('lessNg', ['less:ngVendor', 'less:ngApp']);
     grunt.registerTask('dgeniNg', function() {
         var dgeni, done;
@@ -179,21 +186,24 @@ module.exports = function(grunt) {
             done();
         });
     });
-
-    grunt.registerTask('docNgTemplates', ['copy:docNgTemplates', 'ngtemplates:docNg']);
-
+    grunt.registerTask('doNgTemplates', ['copy:ngTemplates', 'ngtemplates:docApp']);
 
 
-    grunt.registerTask('lint', [
-        'jshint',
-        'jscs'
-    ]);
+
+
+    grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
+    grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates']);
+
+
+
+
+
 
     grunt.registerTask('devNg', [
         'file-log',
         'shell:ngBower',
-        'lessNg',
-        'copy:ngAsset'
+        'cssNg',
+        'jsNg'
     ]);
 
 
@@ -272,7 +282,7 @@ module.exports = function(grunt) {
             tasks = [
                 'docNgCss',
                 'doDgeni',
-                'docNgTemplates'
+                'doNgTemplates'
 
                 // 'useminPrepare:docNg',
                 // 'concat:generated',

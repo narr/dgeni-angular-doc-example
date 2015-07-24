@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
+module.exports = function() {
     return {
         options: {
             // This should be the name of your apps angular module
@@ -21,14 +21,14 @@ module.exports = function(grunt, config) {
             }
             // usemin: 'app/app.js'
         },
-        docNg: {
+        docApp: {
             // This will store the template URL as {app,components}/**/*.html
-            cwd: '<%= docPath.src %>/ng/.tmp',
+            cwd: 'ng/client/.tmp',
             src: [
                 'app/{main,partials}/**/*.html',
                 'components/**/*.html'
             ],
-            dest: '<%= docPath.src %>/ng/.tmp/templates.js'
+            dest: 'ng/client/.tmp/templates.js'
         }
     };
 };

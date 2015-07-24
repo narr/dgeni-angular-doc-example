@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt, config) {
+module.exports = function() {
 
     return {
         docNg: {
