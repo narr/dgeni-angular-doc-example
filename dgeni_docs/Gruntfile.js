@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var logfile;
+    var logfile,
+        copyOpts, concatOpts;
 
-    function getConfig(name) {
-        return require('./grunt/' + name + '.js')();
+    function getConfig(name, options) {
+        return require('./grunt/' + name + '.js')(options);
     }
 
     // Load grunt tasks automatically, when needed
@@ -23,6 +24,29 @@ module.exports = function(grunt) {
     // require('logfile-grunt')(grunt, {clearLogFile: true});
     logfile = require('logfile-grunt');
 
+    // @ options
+    copyOpts = {
+        ngExamples: {
+            cwd: '../src',
+            src: [
+                'bower_components/angular/angular.js',
+                'bower_components/angular-route/angular-route.js',
+                'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+                // 'bower_components/bootstrap/dist/css/bootstrap.css'
+            ]
+        }
+    };
+
+    concatOpts = {
+        ngExamples: {
+            src: [
+                '../src/app/index.js',
+                '../src/components/**/*.js'
+            ]
+        }
+    };
+    // options @
+
     // Define the configuration for all the tasks
     grunt.initConfig({
         // Project settings
@@ -33,14 +57,12 @@ module.exports = function(grunt) {
         // Task Config
         shell: getConfig('shell'),
         less: getConfig('less'),
-        copy: getConfig('copy'),
+        copy: getConfig('copy', copyOpts),
+        concat: getConfig('concat', concatOpts),
         // dgeni: getConfig('dgeni'),
         // Package all the html partials into a single javascript payload
         ngtemplates: getConfig('ngtemplates'),
         watch: getConfig('watch'),
-
-
-
 
 
         // Make sure code styles are up to par and there are no obvious mistakes
@@ -116,7 +138,6 @@ module.exports = function(grunt) {
         },
 
 
-
         filerev: getConfig('filerev'),
 
 
@@ -171,10 +192,37 @@ module.exports = function(grunt) {
     ]);
 
 
-
     grunt.registerTask('lessNg', ['less:ngVendor', 'less:ngApp']);
     grunt.registerTask('dgeniNg', function() {
-        var dgeni, done;
+        var deployments, // examples
+            dgeni, done;
+
+        deployments = [
+            {
+                name: 'default',
+                examples: {
+                    // These files are injected to examples' html.
+                    commonFiles: {
+                        scripts: [
+                            // @ bower files
+                            '../common/bower_components/angular/angular.js',
+                            '../common/bower_components/angular-route/angular-route.js',
+                            '../common/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+                            // bower files @
+                            '../common/module.js'
+                        ]
+                        // stylesheets: [
+                        //     // @ bower files
+                        //     '../common/bower_components/bootstrap/dist/css/bootstrap.css',
+                        //     // bower files @
+                        //     '../common/module.css'
+                        // ]
+                    },
+                    dependencyPath: '../../bower_components' // deps attr in example tag
+                }
+            }
+        ];
+
         dgeni = require('./ng/dgeni/config')({
             sourceFiles: { // Paths are relative to Project Root path
                 include: 'src/**/*.js',
@@ -185,6 +233,9 @@ module.exports = function(grunt) {
                     owner: 'Narr-',
                     repo: 'dgeni-tempate-example'
                 }
+            },
+            examples: {
+                deployments: deployments
             }
         });
         done = this.async();
@@ -192,17 +243,14 @@ module.exports = function(grunt) {
             done();
         });
     });
-    grunt.registerTask('doNgTemplates', ['copy:ngTemplates', 'ngtemplates:docApp']);
-
-
+    grunt.registerTask('doNgTemplates', [
+        'copy:ngTemplates', 'ngtemplates:docApp',
+        'copy:ngExamples', 'concat:ngExamples'
+    ]);
 
 
     grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
     grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates']);
-
-
-
-
 
 
     grunt.registerTask('devNg', [
@@ -214,10 +262,6 @@ module.exports = function(grunt) {
 
 
     // ng @
-
-
-
-
 
 
     // grunt test:server or grunt test:client or grunt test:e2e in CLI
