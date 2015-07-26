@@ -12,8 +12,8 @@ module.exports = function(grunt) {
     require('jit-grunt')(grunt, {
         ngtemplates: 'grunt-angular-templates',
         useminPrepare: 'grunt-usemin',
-        protractor: 'grunt-protractor-runner', // TODO Check
-        buildcontrol: 'grunt-build-control' // TODO Check
+        protractor: 'grunt-protractor-runner',
+        buildcontrol: 'grunt-build-control'
     });
 
     // Time how long tasks take. Can help when optimizing build times
@@ -51,7 +51,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         // Project settings
         pkg: grunt.file.readJSON('package.json'),
-        devPort: 3000,
         prodPath: '../dist_docs',
 
         // Task Config
@@ -59,48 +58,18 @@ module.exports = function(grunt) {
         less: getConfig('less'),
         copy: getConfig('copy', copyOpts),
         concat: getConfig('concat', concatOpts),
-        // dgeni: getConfig('dgeni'),
         // Package all the html partials into a single javascript payload
         ngtemplates: getConfig('ngtemplates'),
         watch: getConfig('watch'),
-
-
+        // Empties folders to start fresh
+        clean: getConfig('clean'),
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint: getConfig('jshint'),
         jscs: getConfig('jscs'),
+
+
         // Client Test settings
         karma: getConfig('karma'),
-
-        protractor: {
-            options: {
-                configFile: 'protractor.conf.js'
-            },
-            chrome: {
-                options: {
-                    args: {
-                        browser: 'chrome'
-                    }
-                }
-            }
-        },
-
-
-        // Empties folders to start fresh
-        clean: {
-            dist: {
-                files: [{
-                    dot: true,
-                    src: [
-                        '<%= docPath.src %>/.tmp',
-                        '<%= docPath.dest %>/*',
-                        '!<%= docPath.dest %>/.git*',
-                        '!<%= docPath.dest %>/.openshift',
-                        '!<%= docPath.dest %>/Procfile'
-                    ]
-                }]
-            },
-            server: '.tmp'
-        },
 
 
         // Reads HTML for usemin blocks to enable smart builds that automatically
@@ -150,6 +119,20 @@ module.exports = function(grunt) {
         htmlmin: getConfig('htmlmin'),
 
 
+        protractor: {
+            options: {
+                configFile: 'protractor.conf.js'
+            },
+            chrome: {
+                options: {
+                    args: {
+                        browser: 'chrome'
+                    }
+                }
+            }
+        },
+
+
         buildcontrol: {
             options: {
                 dir: 'dist',
@@ -186,12 +169,6 @@ module.exports = function(grunt) {
     });
 
     // @ ng
-    grunt.registerTask('lint', [
-        'jshint',
-        'jscs'
-    ]);
-
-
     grunt.registerTask('lessNg', ['less:ngVendor', 'less:ngApp']);
     grunt.registerTask('dgeniNg', function() {
         var deployments, // examples
@@ -253,9 +230,15 @@ module.exports = function(grunt) {
     grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates']);
 
 
+    grunt.registerTask('lint', [
+        'jshint',
+        'jscs'
+    ]);
+
     grunt.registerTask('devNg', [
         'file-log',
         'shell:ngBower',
+        'clean:ng',
         'cssNg',
         'jsNg'
     ]);

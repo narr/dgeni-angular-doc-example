@@ -5,26 +5,35 @@
 'use strict';
 
 module.exports = function() {
+
     return {
         options: {
-            // globals: {
-            //     "angular": null
-            // },
             jshintrc: true,
             reporter: require('jshint-stylish')
         },
-        dist: [
+        ngClient: [
             // client Start
-            '<%= yeoman.client %>/**/*.js',
-            '!<%= yeoman.client %>/.tmp/**/*.js',
-            '!<%= yeoman.client %>/bower_components/**/*.js',
+            'ng/client/**/*.js',
+            '!ng/client/.tmp/**/*.js',
+            '!ng/client/bower_components/**/*.js'
             // client End
             // Server Start
-            'server/**/*.js',
+            // 'server/**/*.js',
             // Server End
             // Test Start
-            'e2e/**/*.js'
+            // 'e2e/**/*.js'
             // Test End
-        ]
+        ],
+        ngServer: {
+            options: {
+                jshintrc: 'server.jshintrc'
+            },
+            files: {
+                src: [
+                    'ng/dgeni/**/*.js',
+                    'ng/server.js'
+                ]
+            }
+        }
     };
 };

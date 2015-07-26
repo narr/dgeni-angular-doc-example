@@ -13,12 +13,11 @@
     "freeze": true,
     "nonew": true,
     "worker": true,
-    "browser": true,
-    "jquery": true,
-    "jasmine": true,
+    "node": true,
+    "debug": true,
+    "mocha": true,
+    "unused": false,
     "globals": {
-        "angular": true,
-        "module": true,
-        "inject": true
+        "_": true
     }
 }
