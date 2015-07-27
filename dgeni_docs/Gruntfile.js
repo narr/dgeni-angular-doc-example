@@ -225,23 +225,24 @@ module.exports = function(grunt) {
         'copy:ngExamples', 'concat:ngExamples'
     ]);
 
-
     grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
     grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates']);
 
-
-    grunt.registerTask('lint', [
-        'jshint',
-        'jscs'
+    grunt.registerTask('lintNg', [
+        'jshint:ngClient', 'jshint:ngServer',
+        'jscs:ngClient', 'jscs:ngServer'
     ]);
 
     grunt.registerTask('devNg', [
         'file-log',
         'shell:ngBower',
         'clean:ng',
+        'lintNg',
         'cssNg',
         'jsNg'
     ]);
+
+
 
 
     // ng @

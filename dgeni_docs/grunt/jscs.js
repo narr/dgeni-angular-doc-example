@@ -6,7 +6,7 @@
 
 module.exports = function() {
     return {
-        client: {
+        ngClient: {
             options: {
                 config: '<%= yeoman.client %>/.jscsrc'
             },
@@ -21,7 +21,7 @@ module.exports = function() {
                 // Test End
             ]
         },
-        server: {
+        ngServer: {
             options: {
                 config: 'server/.jscsrc'
             },
