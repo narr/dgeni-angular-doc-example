@@ -6,14 +6,14 @@
  * @description
  * It is an awesome directive.
  * @example
-<example module="dgeniNgDocTarget" deps="null" animate="false">
+<example module="awesomeExample" deps="null" animate="false">
     <file name="index.html">
         <div ng-controller="ExampleController as example">
             <div awesome></div>
         </div>
     </file>
     <file name="script.js">
-        angular.module('dgeniNgDocTarget').controller('ExampleController', function() {
+        angular.module('awesomeExample', ['dgeniNgDocTarget']).controller('ExampleController', function() {
             var example = this;
         });
     </file>

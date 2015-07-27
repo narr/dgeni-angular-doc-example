@@ -13,8 +13,8 @@ angular.module('dgeniNgDocTarget', ['ngRoute', 'ui.bootstrap'])
         // $locationProvider.hashPrefix('!'); // no HTML5 Mode
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: false,
-            rewriteLinks: true
+            requireBase: true,
+            rewriteLinks: true // intercepts all links and never performs a full page reload
         });
 
         $routeProvider

@@ -1,5 +1,5 @@
 angular.module('dgeniNgDocTarget')
-    .controller('MainCtrl', function($modal, $log, message) {
+    .controller('MainCtrl', function(modalService, $log, message) {
         'use strict';
 
         var that = this;
@@ -68,12 +68,7 @@ angular.module('dgeniNgDocTarget')
         });
 
         that.oepnModal = function() {
-            var modalInstance = $modal.open({
-                templateUrl: 'components/modal/modal.html',
-                controller: 'ModalCtrl as modal',
-                backdrop: 'static'
-            });
-
+            var modalInstance = modalService.oepn();
             modalInstance.result.then(function(result) { // close
                 $log.info('Modal closed at: %s and result: %s', new Date(), result);
             }, function(reason) { // dismiss

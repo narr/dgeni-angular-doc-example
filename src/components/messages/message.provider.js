@@ -38,7 +38,7 @@ angular.module('dgeniNgDocTarget').provider('message', function messageProvider(
              </div>
          </file>
          <file name="script.js">
-             angular.module('messageExample', [])
+             angular.module('messageExample', ['dgeniNgDocTarget'])
                  .config(function(messageProvider) {
                      messageProvider.put('msg1', 'Hello, world!');
                  })
