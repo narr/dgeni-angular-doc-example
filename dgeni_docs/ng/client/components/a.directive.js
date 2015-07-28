@@ -1,6 +1,7 @@
-'use strict';
-
 angular.module('docApp').directive('a', function(DOCS_OVERWRITELINK, DOCS_AREA_DATA) {
+
+    'use strict';
+
     var linkCache = {};
     var isRewrite = function(link) {
         var res = link.indexOf('#/') === -1;

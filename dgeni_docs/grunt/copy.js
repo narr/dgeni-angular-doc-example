@@ -36,15 +36,6 @@ module.exports = function(options) {
 
 
 
-
-
-
-
-
-
-
-
-
         distIndex: {
             options: {
                 process: function (content, srcpath) {

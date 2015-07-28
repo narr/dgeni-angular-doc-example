@@ -17,11 +17,8 @@ module.exports = function() {
 
 
 
-        startServer: {
+        ngServerDev: {
             command: 'node server/app.js'
-        },
-        docNgBower: {
-            command: 'init npm install && bower install'
         }
     };
 };

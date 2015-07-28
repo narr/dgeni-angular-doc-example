@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var logfile,
+    var logfile, targetPath,
         copyOpts, concatOpts;
 
     function getConfig(name, options) {
@@ -24,10 +24,12 @@ module.exports = function(grunt) {
     // require('logfile-grunt')(grunt, {clearLogFile: true});
     logfile = require('logfile-grunt');
 
+    targetPath = '../src'; // the target path for documentation
+
     // @ options
     copyOpts = {
         ngExamples: {
-            cwd: '../src',
+            cwd: targetPath,
             src: [
                 'bower_components/angular/angular.js',
                 'bower_components/angular-route/angular-route.js',
@@ -40,8 +42,8 @@ module.exports = function(grunt) {
     concatOpts = {
         ngExamples: {
             src: [
-                '../src/app/index.js',
-                '../src/components/**/*.js'
+                targetPath + '/app/index.js',
+                targetPath + '/components/**/*.js'
             ]
         }
     };
@@ -117,6 +119,8 @@ module.exports = function(grunt) {
         },
 
         htmlmin: getConfig('htmlmin'),
+
+
 
 
         protractor: {
@@ -201,9 +205,9 @@ module.exports = function(grunt) {
         ];
 
         dgeni = require('./ng/dgeni/config')({
-            sourceFiles: { // Paths are relative to Project Root path
-                include: 'src/**/*.js',
-                exclude: 'src/bower_components/**'
+            sourceFiles: {
+                include: targetPath + '/**/*.js',
+                exclude: targetPath + '/bower_components/**'
             },
             git: {
                 info: {
@@ -237,7 +241,7 @@ module.exports = function(grunt) {
         'file-log',
         'shell:ngBower',
         'clean:ng',
-        'lintNg',
+        // 'lintNg',
         'cssNg',
         'jsNg'
     ]);

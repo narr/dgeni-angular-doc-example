@@ -27,7 +27,7 @@ module.exports = function(options) {
             log.level = 'info';
 
             // Specify the base path used when resolving relative paths to source and output files
-            projectRootPath = path.join(__dirname + '../../../../..');
+            projectRootPath = path.join(__dirname + '../../../..'); // dgeni_docs
             readFilesProcessor.basePath = projectRootPath;
 
             // Specify collections of source files that should contain the documentation to extract
@@ -37,8 +37,8 @@ module.exports = function(options) {
                     exclude: options.sourceFiles.exclude
                 },
                 {
-                    include: 'dgeni_docs/ng/dgeni/content/**/*.ngdoc',
-                    basePath: 'dgeni_docs/ng/dgeni/content'
+                    include: 'ng/dgeni/content/**/*.ngdoc',
+                    basePath: 'ng/dgeni/content'
                 }
             ];
 

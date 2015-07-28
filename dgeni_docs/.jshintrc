@@ -18,6 +18,7 @@
     "jasmine": true,
     "globals": {
         "angular": true,
+        "prettyPrintOne": true,
         "module": true,
         "inject": true
     }
