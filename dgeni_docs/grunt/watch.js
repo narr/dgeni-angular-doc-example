@@ -7,6 +7,10 @@
 module.exports = function() {
 
     return {
+        options: {
+            interrupt: true,
+            livereload: true
+        },
         ngLessVendor: {
             files: 'ng/client/app/vendor.less',
             tasks: 'less:ngVendor'
@@ -19,6 +23,13 @@ module.exports = function() {
                 'ng/client/app/examples/runnableExample.less'
             ],
             tasks: 'less:ngApp'
+        },
+        ngTemplates: {
+            files: [
+                'ng/client/app/**/*.html',
+                'ng/client/components/**/*.html'
+            ],
+            tasks: 'doNgTemplates'
         }
     };
 };

@@ -20,9 +20,7 @@
 <body ng-app="docApp">
 <!--[if lt IE 9]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
-<div class="container" ng-controller="DocsCtrl as docs">
-    <div ng-include="'app/main/main.html'"></div>
-</div>
+<div ng-include="'app/main/main.html'"></div>
 
 <!--build:js app/vendor.js-->
 <script src="bower_components/google-code-prettify/src/prettify.js"></script>
@@ -41,5 +39,6 @@
 <script src="app/main/main.controller.js"></script>
 <script src=".tmp/templates.js"></script>
 <!--endbuild-->
+<script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>

@@ -36,7 +36,7 @@ module.exports = function(options) {
 
 
 
-        distIndex: {
+        distIndex: { // remove liveload.js
             options: {
                 process: function (content, srcpath) {
                     return content.replace(/<head>/, '<head><base href="/">');

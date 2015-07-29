@@ -225,12 +225,14 @@ module.exports = function(grunt) {
         });
     });
     grunt.registerTask('doNgTemplates', [
-        'copy:ngTemplates', 'ngtemplates:docApp',
+        'copy:ngTemplates', 'ngtemplates:docApp'
+    ]);
+    grunt.registerTask('doNgExamples', [
         'copy:ngExamples', 'concat:ngExamples'
     ]);
 
     grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
-    grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates']);
+    grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates', 'doNgExamples']);
 
     grunt.registerTask('lintNg', [
         'jshint:ngClient', 'jshint:ngServer',
