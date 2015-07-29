@@ -17,8 +17,9 @@ module.exports = function() {
         },
         ngLessApp: {
             files: [
-                'ng/client/app/app.less',
+                'ng/client/components/navBar/navbar.less',
                 'ng/client/components/prettyprint/prettyprint.less',
+                'ng/client/app/app.less',
                 'ng/client/app/main/main.less',
                 'ng/client/app/examples/runnableExample.less'
             ],

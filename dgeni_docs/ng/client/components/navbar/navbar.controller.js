@@ -2,6 +2,7 @@ angular.module('docApp').controller('NavbarController', function(DOCS_NAVIGATION
     'use strict';
 
     var navbar = this;
+    navbar.activeClass = 'Home';
     navbar.areas = [];
     navbar.isCollapsed = true;
     angular.forEach(DOCS_NAVIGATION, function(v, k) {

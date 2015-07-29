@@ -7,7 +7,7 @@ angular.module('docApp')
         var basePath = '/';
 
         main.currentArea = null;
-        main.partialPath = 'app/partials/index.html';
+        // main.partialPath = 'app/partials/index.html';
 
         main.navState = function(navItem) {
             var res = [];
@@ -58,12 +58,12 @@ angular.module('docApp')
 
                 // console.log(location.href);
             }
-
-
         };
 
         $scope.$on('$locationChangeStart', function(e, args) {
             console.log('$locationChangeStart');
             main.changeCurrent($location.path(), $location.hash());
         });
+
+        main.changeCurrent($location.path(), $location.hash());
     });
