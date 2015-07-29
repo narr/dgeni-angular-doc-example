@@ -1,4 +1,4 @@
-angular.module('docApp').controller('DocsCtrl', function($scope, $location, DOCS_NAVIGATION) {
+angular.module('docApp').controller('DocsCtrl', function($scope, $location, DOCS_NAVIGATION, $templateCache, $window) {
     'use strict';
 
     var docs = this;
@@ -18,7 +18,10 @@ angular.module('docApp').controller('DocsCtrl', function($scope, $location, DOCS
     };
 
     docs.changeCurrent = function(newPath, hash) {
-        var area;
+        var oldPath, area;
+
+        oldPath = docs.currentPath || "";
+
         docs.currentPath = newPath;
         newPath = newPath.replace(new RegExp('^' + basePath), '');
         area = newPath.split('/')[0];
@@ -35,10 +38,27 @@ angular.module('docApp').controller('DocsCtrl', function($scope, $location, DOCS
         }
         newPath = 'app/partials/' + newPath;
 
-        // console.log(newPath, hash);
+        // console.log(newPath + " && " + hash);
 
-        docs.currentHash = hash;
-        docs.partialPath = newPath;
+        if($templateCache.get(newPath)) {
+            docs.currentHash = hash;
+            docs.partialPath = newPath;
+        }
+        else {
+            // console.log(oldPath);
+            // $location.path(oldPath).replace();
+
+            // $location.path("file:///D:/Project/github/dgeni-tempate-example/dgeni_docs/ng/client/404.html");
+
+
+            $window.location.href = "404.html";
+
+            // console.log(location.href);
+        }
+
+
+
+
     };
 
     $scope.$on('$locationChangeStart', function(e, arg) {
