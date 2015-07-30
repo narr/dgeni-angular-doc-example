@@ -64,7 +64,7 @@ module.exports = function generateNavigationProcessor(log) {
                 res.navItems.push({
                     name: page.name,
                     type: '',
-                    href: page.path
+                    href: page.path.replace('\\', '/')
                 });
             });
 

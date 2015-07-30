@@ -1,7 +1,6 @@
 <nav class="navbar navbar-static-top navbar-inverse" ng-controller="NavbarController as navbar">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#/index" ng-class="navbar.activeClass === 'Home' ?
-        'nav-active' : ''" ng-click="navbar.activeClass = 'Home'">
+        <a class="navbar-brand title" href="." ng-class="main.currentArea ? '' : 'nav-active'">
             <span class="glyphicon glyphicon-home"></span> dgeniNgdocExample Docs
         </a>
 
@@ -16,15 +15,14 @@
     <div collapse="navbar.isCollapsed" class="navbar-collapse">
         <ul class="nav navbar-nav">
             <li ng-repeat="area in navbar.areas">
-                <a ng-href="{{area.href}}" ng-class="navbar.activeClass === area.name ?
-                'nav-active' : ''" ng-click="navbar.activeClass = area.name">
+                <a ng-href="{{area.href}}" ng-class="area.id === main.currentArea.id ? 'nav-active' : ''">
                     {{area.name}}
                 </a>
             </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right nav-date">
-            <li class="navbar-text">Current date: {{navbar.date | date:'yyyy-MM-dd'}}</li>
+            <li class="navbar-text">Current date: {{navbar.date | date:'MM/dd/yyyy - HH:mm:ss'}}</li>
         </ul>
     </div>
 </nav>

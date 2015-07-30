@@ -1,13 +1,10 @@
-angular.module('docApp')
-    .controller('MainController', function($scope, $location, DOCS_NAVIGATION, $templateCache, $window) {
-
+angular.module('docApp').
+    controller('MainController',
+    function($scope, $location, DOCS_NAVIGATION, $templateCache, $window) {
         'use strict';
 
-        var main = this;
-        var basePath = '/';
-
-        main.currentArea = null;
-        // main.partialPath = 'app/partials/index.html';
+        var main;
+        main = this;
 
         main.navState = function(navItem) {
             var res = [];
@@ -21,49 +18,34 @@ angular.module('docApp')
         };
 
         main.changeCurrent = function(newPath, hash) {
-            var oldPath, area;
+            var currentNavGroup, partialPath;
 
-            oldPath = main.currentPath || "";
+            main.currentPath = newPath; // a path following base path  e.g. /guide/howToUse
+            currentNavGroup = newPath.split('/')[1]; // the current nav group  e.g. api, guide
+            main.currentArea = DOCS_NAVIGATION[currentNavGroup];
 
-            main.currentPath = newPath;
-            newPath = newPath.replace(new RegExp('^' + basePath), '');
-            area = newPath.split('/')[0];
-            main.currentArea = DOCS_NAVIGATION[area];
-
-            // console.log(main.currentArea);
-            // console.log(newPath);
-
-            if (newPath === '' || newPath === 'index.html') {
-                newPath = 'index';
-            }
-            if (!newPath.match(/\.html$/)) {
-                newPath = newPath + '.html';
-            }
-            newPath = 'app/partials/' + newPath;
-
-            // console.log(newPath + " && " + hash);
-
-            if ($templateCache.get(newPath)) {
+            if (newPath === '/') {
+                partialPath = 'app/partials/index.html';
+                main.partialPath = partialPath;
                 main.currentHash = hash;
-                main.partialPath = newPath;
             }
             else {
-                // console.log(oldPath);
-                // $location.path(oldPath).replace();
-
-                // $location.path("file:///D:/Project/github/dgeni-tempate-example/dgeni_docs/ng/client/404.html");
-
-
-                $window.location.href = "404.html";
-
-                // console.log(location.href);
+                partialPath = 'app/partials' + newPath + '.html';
+                if ($templateCache.get(partialPath)) {
+                    main.partialPath = partialPath;
+                    main.currentHash = hash;
+                }
+                else {
+                    // $window.location.href = '404.html';
+                }
             }
+            console.log(newPath);
         };
 
         $scope.$on('$locationChangeStart', function(e, args) {
-            console.log('$locationChangeStart');
+            // console.log('$locationChangeStart..!!');
             main.changeCurrent($location.path(), $location.hash());
         });
 
-        main.changeCurrent($location.path(), $location.hash());
+        main.changeCurrent($location.path(), $location.hash()); // init
     });
