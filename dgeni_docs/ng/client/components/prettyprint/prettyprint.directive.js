@@ -4,9 +4,11 @@ angular.module('docApp').directive('pre', function() {
     return {
         restrict: 'E',
         link: function($scope, $elem, $attrs) {
-            var formatted = prettyPrintOne($elem.find('>code').html());
+            var $code, formatted;
+            $code = $elem.find('>code');
+            formatted = prettyPrintOne($code.html());
+            $code.html(formatted);
             $elem.addClass('prettyprint');
-            $elem.find('>code').html(formatted);
         }
     };
 });

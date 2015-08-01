@@ -36,10 +36,10 @@ angular.module('docApp').
                     main.currentHash = hash;
                 }
                 else {
-                    // $window.location.href = '404.html';
+                    $window.location.href = '404.html';
                 }
             }
-            console.log(newPath);
+            // console.log(newPath);
         };
 
         $scope.$on('$locationChangeStart', function(e, args) {

@@ -31,6 +31,7 @@ angular.module('docApp').directive('a', function(DOCS_OVERWRITELINK, DOCS_AREA_D
             if (!DOCS_OVERWRITELINK) {
                 return;
             }
+            // Executes the expression on the current scope at a later point in time
             $scope.$evalAsync(function(scope) {
                 var link, newLink;
                 link = $elem.attr('href');
