@@ -1,11 +1,11 @@
-<div class="container" ng-controller="MainController as main">
+<div class="main container" ng-controller="MainController as main">
     <div class="header" ng-include="'components/navbar/navbar.html'"></div>
 
     <div class="row">
         <div class="col-md-12" ng-if="!main.currentArea" ng-include="main.partialPath"></div>
 
         <div class="col-md-3" ng-if="main.currentArea">
-            <ul class="nav-list naked-list">
+            <ul class="naked-list">
                 <li ng-repeat="navGroup in main.currentArea.navGroups" class="nav-index-group">
                     <a class="nav-index-group-heading" ng-href="{{navGroup.href}}"><span>{{navGroup.name}}</span></a>
                     <ul>
