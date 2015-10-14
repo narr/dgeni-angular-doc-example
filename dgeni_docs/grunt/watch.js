@@ -5,7 +5,6 @@
 'use strict';
 
 module.exports = function() {
-
     return {
         options: {
             interrupt: true,
@@ -31,6 +30,13 @@ module.exports = function() {
                 'ng/client/components/**/*.html'
             ],
             tasks: 'doNgTemplates'
+        },
+        ngJasmine: {
+            files: [
+                'ng/client/**/*.js',
+                '!ng/client/bower_components/**/*.js'
+            ],
+            tasks: 'karma:jasmineNg'
         }
     };
 };

@@ -1,12 +1,14 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var logfile, targetPath,
-        copyOpts, concatOpts;
+    var path, logfile, targetPath,
+        shellOpts, copyOpts, concatOpts;
 
     function getConfig(name, options) {
         return require('./grunt/' + name + '.js')(options);
     }
+
+    path = require('path');
 
     // Load grunt tasks automatically, when needed
     require('jit-grunt')(grunt, {
@@ -20,25 +22,26 @@ module.exports = function(grunt) {
     require('time-grunt')(grunt);
 
     // All the output you see in the console from both Grunt and
-    // running tasks will also be written to ./logs/grunt.log.
+    // running tasks will also be written to ./grunt.log.
     // require('logfile-grunt')(grunt, {clearLogFile: true});
     logfile = require('logfile-grunt');
 
     targetPath = '../src'; // the target path for documentation
 
-    // @ options
+    // @ Options
+    shellOpts = {
+        targetPath: targetPath
+    };
     copyOpts = {
         ngExamples: {
             cwd: targetPath,
             src: [
-                'bower_components/angular/angular.js',
-                'bower_components/angular-route/angular-route.js',
-                'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-                // 'bower_components/bootstrap/dist/css/bootstrap.css'
+                'bower_components/angular/angular.min.js',
+                'bower_components/angular-route/angular-route.min.js',
+                'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
             ]
         }
     };
-
     concatOpts = {
         ngExamples: {
             src: [
@@ -47,118 +50,36 @@ module.exports = function(grunt) {
             ]
         }
     };
-    // options @
+    // Options @
 
     // Define the configuration for all the tasks
     grunt.initConfig({
         // Project settings
         pkg: grunt.file.readJSON('package.json'),
-        prodPath: '../dist_docs',
-
+        prodPath: '../dist_docs', // the distribution path for documentation
         // Task Config
-        shell: getConfig('shell'),
-        less: getConfig('less'),
-        copy: getConfig('copy', copyOpts),
-        concat: getConfig('concat', concatOpts),
-        // Package all the html partials into a single javascript payload
-        ngtemplates: getConfig('ngtemplates'),
-        watch: getConfig('watch'),
-        // Empties folders to start fresh
-        clean: getConfig('clean'),
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint: getConfig('jshint'),
         jscs: getConfig('jscs'),
-
-
-        // Client Test settings
+        clean: getConfig('clean'), // Empties folders to start fresh
+        shell: getConfig('shell', shellOpts),
+        less: getConfig('less'),
+        copy: getConfig('copy', copyOpts),
+        // Package all the html partials into a single javascript payload
+        ngtemplates: getConfig('ngtemplates'),
+        concat: getConfig('concat', concatOpts),
         karma: getConfig('karma'),
-
-
-        // Reads HTML for usemin blocks to enable smart builds that automatically
-        // concat, minify and revision files. Creates configurations in memory so
-        // additional tasks can operate on them
-        useminPrepare: getConfig('usemin').useminPrepare,
-
-
-        // Performs rewrites based on filerev and the useminPrepare configuration
-        usemin: getConfig('usemin').usemin,
-
-        // The following *-min tasks produce minified files in the dist folder
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= docPath.src %>/assets/images',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= docPath.dest %>/public/assets/images'
-                }]
-            }
-        },
-
+        watch: getConfig('watch'),
+        // The following *-min tasks produce minified files in the targeted folder
+        imagemin: getConfig('imagemin'),
         // Allow the use of non-minsafe AngularJS files. Automatically makes it
         // minsafe compatible so Uglify does not destroy the ng references
-        ngAnnotate: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= docPath.src %>/.tmp/concat',
-                    src: '*/**.js',
-                    dest: '<%= docPath.src %>/.tmp/concat'
-                }]
-            }
-        },
-
-
+        ngAnnotate: getConfig('ngAnnotate'),
+        uglify: getConfig('uglify'),
         filerev: getConfig('filerev'),
-
-
-        uglify: {
-            options: {
-                preserveComments: 'some' // to remain comments starting with *!
-            }
-        },
-
         htmlmin: getConfig('htmlmin'),
-
-
-
-
-        protractor: {
-            options: {
-                configFile: 'protractor.conf.js'
-            },
-            chrome: {
-                options: {
-                    args: {
-                        browser: 'chrome'
-                    }
-                }
-            }
-        },
-
-
-        buildcontrol: {
-            options: {
-                dir: 'dist',
-                commit: true,
-                push: true,
-                connectCommits: false,
-                message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-            },
-            heroku: {
-                options: {
-                    remote: 'heroku',
-                    branch: 'master'
-                }
-            },
-            openshift: {
-                options: {
-                    remote: 'openshift',
-                    branch: 'master'
-                }
-            }
-        }
-        // ngDoc(Dgeni)(after file log and lint),
+        protractor: getConfig('protractor'),
+        buildcontrol: getConfig('buildcontrol')
     });
 
     // @ Task
@@ -173,10 +94,16 @@ module.exports = function(grunt) {
     });
 
     // @ ng
+    grunt.registerTask('lintNg', [
+        'jshint:ngClientType', 'jshint:ngServerType',
+        'jscs:ngClientType', 'jscs:ngServerType'
+    ]);
+    grunt.registerTask('bowerNg', ['shell:srcBower', 'shell:ngBower']);
     grunt.registerTask('lessNg', ['less:ngVendor', 'less:ngApp']);
+    grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
     grunt.registerTask('dgeniNg', function() {
-        var deployments, // examples
-            dgeni, done;
+        var deployments, // for examples
+            srcPathFromRoot, dgeni, done;
 
         deployments = [
             {
@@ -186,9 +113,9 @@ module.exports = function(grunt) {
                     commonFiles: {
                         scripts: [
                             // @ bower files
-                            '../common/bower_components/angular/angular.js',
-                            '../common/bower_components/angular-route/angular-route.js',
-                            '../common/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+                            '../common/bower_components/angular/angular.min.js',
+                            '../common/bower_components/angular-route/angular-route.min.js',
+                            '../common/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                             // bower files @
                             '../common/module.js'
                         ]
@@ -199,15 +126,15 @@ module.exports = function(grunt) {
                         //     '../common/module.css'
                         // ]
                     },
-                    dependencyPath: '../../bower_components' // deps attr in example tag
+                    dependencyPath: '../common/bower_components' // deps attr('a.js; b.js') in example tag
                 }
             }
         ];
-
+        srcPathFromRoot = path.relative(__dirname + '/..', __dirname + '/' + targetPath);
         dgeni = require('./ng/dgeni/config')({
             sourceFiles: {
-                include: targetPath + '/**/*.js',
-                exclude: targetPath + '/bower_components/**'
+                include: srcPathFromRoot + '/**/*.js',
+                exclude: srcPathFromRoot + '/bower_components/**'
             },
             git: {
                 info: {
@@ -230,114 +157,52 @@ module.exports = function(grunt) {
     grunt.registerTask('doNgExamples', [
         'copy:ngExamples', 'concat:ngExamples'
     ]);
-
-    grunt.registerTask('cssNg', ['lessNg', 'copy:ngAsset']);
     grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates', 'doNgExamples']);
-
-    grunt.registerTask('lintNg', [
-        'jshint:ngClient', 'jshint:ngServer',
-        'jscs:ngClient', 'jscs:ngServer'
-    ]);
+    grunt.registerTask('setUsemin', function(target) {
+        var configData;
+        configData = grunt.config.data;
+        // Reads HTML for usemin blocks to enable smart builds that automatically
+        // concat, minify and revision files. Creates configurations in memory so
+        // additional tasks can operate on them
+        configData.useminPrepare = getConfig('usemin').useminPrepare(target);
+        // Performs rewrites based on filerev and the useminPrepare configuration
+        configData.usemin = getConfig('usemin').usemin(target);
+    });
 
     grunt.registerTask('devNg', [
         'file-log',
-        'shell:ngBower',
-        'clean:ng',
-        // 'lintNg',
+        'lintNg',
+        'clean:ngDev',
+        'bowerNg',
         'cssNg',
-        'jsNg'
+        'jsNg',
+        'karma:jasmineNg'
+
+        // mochaTest Server
     ]);
-
-
-
-
-    // ng @
-
-
-    // grunt test:server or grunt test:client or grunt test:e2e in CLI
-    grunt.registerTask('test', function(target) {
-        if (target === 'server') {
-            grunt.task.run([
-                'mochaTest'
-            ]);
-        }
-        else if (target === 'client') {
-            grunt.task.run([
-                'clean:server',
-                'karma:client'
-            ]);
-        }
-        else if (target === 'e2e') {
-            grunt.task.run([
-                'clean:server',
-                'express:dev',
-                'protractor'
-            ]);
-        }
-        else {
-            grunt.task.run([
-                'test:server',
-                'test:client'
-            ]);
-        }
-    });
-    grunt.registerTask('build', [
-        'clean:dist',
-        'sprite',
-        'sass',
-        'ngtemplates',
+    grunt.registerTask('buildNg', [
+        'devNg',
+        'clean:ngBuild',
+        'copy:ngIndex',
+        'copy:ngDistAssets',
+        'imagemin:ng',
+        'setUsemin:ng',
         'useminPrepare',
         'concat:generated',
-        'ngAnnotate',
-        'copy:dist',
-        // 'cssmin:generated',
+        'copy:ngReplaceTempPath',
+        'ngAnnotate:usemin',
         'uglify:generated',
-        'filerev',
+        'filerev:ng',
         'usemin',
-        'htmlmin:dist'
+        'copy:ngDistExamples',
+        'ngAnnotate:examples',
+        'uglify:ngExamples',
+        'filerev:ngExamples',
+        'setUsemin:ngExamples',
+        'usemin',
+        'htmlmin:ngDist',
+        // check mocha, serverjs, protractorNg, buildcontrol
     ]);
-    grunt.registerTask('prod', [
-        'file-log',
-        'lint',
-        'test',
-        'build'
-    ]);
-    grunt.registerTask('doUsemin', function(target) {
-        var configData;
-        configData = grunt.config.data;
-        if (target === 'docNg') {
-            configData.usemin = configData.usemin[target];
-        }
-
-        if (target) {
-            grunt.task.run('usemin');
-        }
-    });
-    grunt.registerTask('docNg', function(target) {
-        var tasks;
-        if (target === 'prod') {
-
-        }
-        else {
-            tasks = [
-                'docNgCss',
-                'doDgeni',
-                'doNgTemplates'
-
-                // 'useminPrepare:docNg',
-                // 'concat:generated',
-                // 'cssmin:generated',
-                // // 'ngAnnotate',
-//
-                // 'uglify:generated',
-//
-//
-                // 'filerev:preDocNg',
-                // 'doUsemin:docNg',
-                // 'htmlmin:docNg'
-            ];
-        }
-        grunt.task.run(tasks);
-    });
+    // ng @
     // Task @
 };

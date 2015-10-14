@@ -24,7 +24,7 @@ angular.module('docApp').
             currentNavGroup = newPath.split('/')[1]; // the current nav group  e.g. api, guide
             main.currentArea = DOCS_NAVIGATION[currentNavGroup];
 
-            if (newPath === '/') {
+            if (newPath === '' || newPath === '/') {
                 partialPath = 'app/partials/index.html';
                 main.partialPath = partialPath;
                 main.currentHash = hash;

@@ -5,9 +5,8 @@
 'use strict';
 
 module.exports = function() {
-
     return {
-        ngClient: {
+        ngClientType: {
             options: {
                 config: '.jscsrc'
             },
@@ -15,16 +14,15 @@ module.exports = function() {
                 'ng/client/**/*.js',
                 '!ng/client/bower_components/**/*.js',
                 '!ng/client/.tmp/**/*.js'
-
-                // 'e2e/**/*.js'
             ]
         },
-        ngServer: {
+        ngServerType: {
             options: {
                 config: 'server.jscsrc'
             },
             src: [
                 'ng/dgeni/**/*.js',
+                '!ng/dgeni/config/templates/**/*.js',
                 'ng/server.js'
             ]
         }

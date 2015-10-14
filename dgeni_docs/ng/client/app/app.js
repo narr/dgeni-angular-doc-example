@@ -10,7 +10,7 @@
             if (!DOCS_OVERWRITELINK) {
                 $locationProvider.html5Mode({
                     enabled: true,
-                    requireBase: false,
+                    requireBase: true,
                     rewriteLinks: true
                 });
             }

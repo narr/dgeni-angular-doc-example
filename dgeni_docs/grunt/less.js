@@ -9,11 +9,10 @@ module.exports = function() {
         options: {
             compress: true,
             sourceMap: true,
-            sourceMapRootpath: 'http://localhost:3000'
+            sourceMapRootpath: '../../../..'
         },
         ngVendor: {
             options: {
-                sourceMapBasepath: 'ng/client',
                 sourceMapURL: 'vendor.css.map'
             },
             src: 'ng/client/app/vendor.less',
@@ -21,7 +20,6 @@ module.exports = function() {
         },
         ngApp: {
             options: {
-                sourceMapBasepath: 'ng/client',
                 sourceMapURL: 'app.css.map'
             },
             src: 'ng/client/app/app.less',

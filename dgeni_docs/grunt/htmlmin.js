@@ -5,23 +5,18 @@
 'use strict';
 
 module.exports = function() {
-
     return {
-        docNg: {
+        ngDist: {
             options: {
+                minifyCSS: true,
+                minifyJS: true,
                 removeComments: true,
                 collapseWhitespace: true
             },
-            files: [
-                {
-                    expand: true,
-                    cwd: '<%= docPath.dest %>/ng',
-                    dest: '<%= docPath.dest %>/ng',
-                    src: [
-                        '**/*.html'
-                    ]
-                }
-            ]
+            expand: true,
+            cwd: '<%= prodPath %>/ng/client',
+            src: '**/*.html',
+            dest: '<%= prodPath %>/ng/client'
         }
     };
 };

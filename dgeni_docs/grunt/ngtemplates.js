@@ -19,7 +19,6 @@ module.exports = function() {
                 removeScriptTypeAttributes: true,
                 removeStyleLinkTypeAttributes: true
             }
-            // usemin: 'app/app.js'
         },
         docApp: {
             // This will store the template URL as {app,components}/**/*.html

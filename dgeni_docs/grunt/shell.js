@@ -4,21 +4,19 @@
 
 'use strict';
 
-module.exports = function() {
+module.exports = function(options) {
     return {
+        srcBower: {
+            command: [
+                'cd ' + options.targetPath,
+                'bower install'
+            ].join('&&')
+        },
         ngBower: {
             command: [
                 'cd ng/client',
-                'bower install',
-                'cd ../..'
+                'bower install'
             ].join('&&')
-        },
-
-
-
-
-        ngServerDev: {
-            command: 'node server/app.js'
         }
     };
 };

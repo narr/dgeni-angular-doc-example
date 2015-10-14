@@ -1,22 +1,19 @@
-describe('controllers', function() {
+describe('MainController', function() {
     'use strict';
 
-    var scope;
+    var $scope, $controller;
 
-    beforeEach(module('dgeniNgdocExample'));
-
-    beforeEach(inject(function($rootScope) {
-        scope = $rootScope.$new();
+    beforeEach(module('docApp'));
+    beforeEach(inject(function(_$rootScope_, _$controller_) {
+        $scope = _$rootScope_.$new();
+        $controller = _$controller_;
     }));
 
-    it('should define more than 5 awesome things', inject(function($controller) {
-        expect(scope.awesomeThings).toBeUndefined();
-
-        $controller('MainCtrl', {
-            $scope: scope
+    describe('navState', function() {
+        it('should return Array', function() {
+            var controller;
+            controller = $controller('MainController', {$scope: $scope});
+            expect(angular.isArray(controller.navState({}))).toBeTruthy();
         });
-
-        expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-        expect(scope.awesomeThings.length > 5).toBeTruthy();
-    }));
+    });
 });

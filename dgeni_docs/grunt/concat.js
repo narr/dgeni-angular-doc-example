@@ -5,7 +5,6 @@
 'use strict';
 
 module.exports = function(options) {
-
     return {
         ngExamples: {
             files: [
