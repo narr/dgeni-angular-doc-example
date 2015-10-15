@@ -10,6 +10,8 @@
         "express": "^4.13.1"
     },
     "devDependencies": {
+        "blanket": "^1.1.7",
+        "chai": "^3.3.0",
         "dgeni": "^0.4.1",
         "dgeni-packages": "^0.10.7",
         "grunt": "^0.4.5",
@@ -27,6 +29,7 @@
         "grunt-filerev": "^2.3.1",
         "grunt-jscs": "^1.8.0",
         "grunt-karma": "^0.11.1",
+        "grunt-mocha-test": "^0.12.7",
         "grunt-ng-annotate": "^1.0.1",
         "grunt-protractor-runner": "^2.0.0",
         "grunt-shell": "^1.1.2",
@@ -37,6 +40,8 @@
         "karma-phantomjs-launcher": "^0.1.4",
         "lodash": "^2.4.1",
         "logfile-grunt": "^0.2.0",
+        "mocha": "^2.3.3",
+        "supertest": "^1.1.0",
         "time-grunt": "^1.2.1",
         "winston": "^1.0.1"
     },

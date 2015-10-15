@@ -22,7 +22,8 @@ module.exports = function() {
             src: [
                 'ng/dgeni/**/*.js',
                 '!ng/dgeni/config/templates/**/*.js',
-                'ng/server.js'
+                'ng/server.js',
+                'ng/server.spec.js'
             ]
         }
     };

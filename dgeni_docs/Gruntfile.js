@@ -69,6 +69,7 @@ module.exports = function(grunt) {
         ngtemplates: getConfig('ngtemplates'),
         concat: getConfig('concat', concatOpts),
         karma: getConfig('karma'),
+        mochaTest: getConfig('mochaTest'),
         watch: getConfig('watch'),
         // The following *-min tasks produce minified files in the targeted folder
         imagemin: getConfig('imagemin'),
@@ -158,6 +159,11 @@ module.exports = function(grunt) {
         'copy:ngExamples', 'concat:ngExamples'
     ]);
     grunt.registerTask('jsNg', ['dgeniNg', 'doNgTemplates', 'doNgExamples']);
+    grunt.registerTask('doMochaTest', function(target) {
+        if (target === 'ngServer') {
+            grunt.task.run(['mochaTest:ngServer', 'mochaTest:ngBlanket']);
+        }
+    });
     grunt.registerTask('setUsemin', function(target) {
         var configData;
         configData = grunt.config.data;
@@ -176,12 +182,11 @@ module.exports = function(grunt) {
         'bowerNg',
         'cssNg',
         'jsNg',
-        'karma:jasmineNg'
-
-        // mochaTest Server
+        'karma:jasmineNg',
+        'doMochaTest:ngServer'
     ]);
     grunt.registerTask('buildNg', [
-        'devNg',
+        // 'devNg',
         'clean:ngBuild',
         'copy:ngIndex',
         'copy:ngDistAssets',
@@ -201,7 +206,7 @@ module.exports = function(grunt) {
         'setUsemin:ngExamples',
         'usemin',
         'htmlmin:ngDist',
-        // check mocha, serverjs, protractorNg, buildcontrol
+        // karma coverage, copy serverjs, protractorNg, start server, buildcontrol, google insight to check webpage spped
     ]);
     // ng @
     // Task @

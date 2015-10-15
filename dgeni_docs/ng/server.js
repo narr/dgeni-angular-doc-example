@@ -44,3 +44,5 @@ app.listen(port, function() {
         winston.debug('Our app is running on http://localhost:' + port);
     }
 });
+
+module.exports = app;
