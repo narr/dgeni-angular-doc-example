@@ -23,7 +23,7 @@ script:
   - grunt e2e:firefox
 
 before_deploy:
-  - cd dist_ng_doc
+  - cd ../dist_ng_doc
 
 deploy:
   provider: heroku
