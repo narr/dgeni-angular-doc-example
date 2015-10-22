@@ -199,8 +199,8 @@ module.exports = function(grunt) {
         'setUsemin:distExamples',
         'usemin',
         'htmlmin:dist',
-        'copy:distServer'
-        // 'server:dist'
+        'copy:distServer',
+        'shell:installDistDep'
     ]);
 
     grunt.registerTask('e2e', [

@@ -28,10 +28,15 @@ module.exports = function(options) {
                 'node_modules/karma/bin/karma start test/karma.conf.js'
             ].join('&&')
         },
+        installDistDep: {
+            command: [
+                'cd <%= prodPath %>',
+                'npm install'
+            ].join('&&')
+        },
         runDistServer: {
             command: [
                 'cd <%= prodPath %>',
-                'npm install',
                 'export PORT=8080',
                 'node server/server'
             ].join('&&')
