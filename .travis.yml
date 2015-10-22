@@ -11,7 +11,8 @@ install:
 
 before_script:
   - grunt build
+  - grunt server:dist &
+  - sleep 1 # give it some time to start
 
 script:
-  - grunt
-
+  - grunt e2e
