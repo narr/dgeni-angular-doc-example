@@ -12,13 +12,7 @@ exports.config = {
     specs: '*-spec.js',
 
     capabilities: {
-        'browserName': 'chrome',
-        'chromeOptions': {
-            args: [
-                // '--start-maximized' // doesn't work
-                '--window-size=1920,1200'
-            ]
-        }
+        'browserName': 'firefox'
     },
 
     framework: 'jasmine',
@@ -26,5 +20,9 @@ exports.config = {
     jasmineNodeOpts: {
         // If true, display spec names.
         isVerbose: true
+    },
+
+    onPrepare: function() {
+        browser.driver.manage().window().maximize();
     }
 };

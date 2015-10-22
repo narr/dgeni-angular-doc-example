@@ -203,9 +203,12 @@ module.exports = function(grunt) {
         'shell:installDistDep'
     ]);
 
-    grunt.registerTask('e2e', [
-        'protractor:chrome'
-    ]);
+    grunt.registerTask('e2e', function(target) {
+        if (!target) {
+            target = 'chrome';
+        }
+        grunt.task.run('protractor:' + target);
+    });
 
     grunt.registerTask('server', function(target) {
         if (target === 'target') {

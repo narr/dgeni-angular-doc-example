@@ -6,12 +6,11 @@ module.exports = function() {
             configFile: 'test/e2e/protractor.conf.js',
             webdriverManagerUpdate: true
         },
-        chrome: {
-            // options: {
-            //     args: {
-            //         browser: 'chrome',
-            //     }
-            // }
+        chrome: {},
+        firefox: {
+            options: {
+                configFile: 'test/e2e/protractor.conf.firefox.js'
+            }
         }
     };
 };
