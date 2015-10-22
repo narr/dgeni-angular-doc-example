@@ -1,5 +1,5 @@
 # dgeniNgdocExample
-[![Build Status](https://travis-ci.org/Quramy/dgeni-ngdocs-example.svg?branch=master)](https://travis-ci.org/Quramy/dgeni-ngdocs-example)
+[![Build Status](https://travis-ci.org/Narr-/dgeni-angular-doc-example.svg)](https://travis-ci.org/Narr-/dgeni-angular-doc-example)
 
 A sample application with ngDoc.
 

@@ -200,7 +200,7 @@ module.exports = function(grunt) {
         'usemin',
         'htmlmin:dist',
         'copy:distServer',
-        // 'server:dist'
+        'server:dist'
     ]);
 
     grunt.registerTask('e2e', [
