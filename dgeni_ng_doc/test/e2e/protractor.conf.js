@@ -12,13 +12,14 @@ exports.config = {
     specs: '*-spec.js',
 
     capabilities: {
-        'browserName': 'firefox'
-        // 'chromeOptions': {
-        //     args: [
-        //         // '--start-maximized' // doesn't work
-        //         '--window-size=1920,1200'
-        //     ]
-        // }
+        'browserName': 'chrome',
+        'chromeOptions': {
+            args: [
+                '--no-sandbox',
+                // '--start-maximized' // doesn't work
+                '--window-size=1920,1200'
+            ]
+        }
     },
 
     framework: 'jasmine',
