@@ -1,0 +1,13 @@
+{
+    "preset": "jquery",
+    "disallowKeywordsOnNewLine": null,
+    "maximumLineLength": null,
+    "requireCapitalizedComments": false,
+    "requirePaddingNewLinesBeforeLineComments": null,
+    "requireSpacesInsideArrayBrackets": null,
+    "requireSpacesInsideBrackets": false,
+    "requireSpacesInsideObjectBrackets": null,
+    "requireSpacesInsideParentheses": null,
+    "validateLineBreaks": null,
+    "validateQuoteMarks": "'"
+}
