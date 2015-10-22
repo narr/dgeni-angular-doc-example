@@ -15,6 +15,3 @@ before_script:
 script:
   - grunt
 
-notifications:
-  emails:
-    - nardgu@gmail.com
