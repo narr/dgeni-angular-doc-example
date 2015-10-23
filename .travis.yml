@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "4.2"
+  - "4.2.0"
 
 install:
   - npm install -g grunt-cli
@@ -23,8 +23,8 @@ script:
   - grunt e2e:firefox
 
 # Note that pull request builds skip deployment step altogether.
-# before_deploy:
-  # - cd ../dist_ng_doc
+before_deploy:
+  - cd ../dist_ng_doc
 
 deploy:
   provider: heroku

@@ -11,5 +11,8 @@
     "devDependencies": {
         "winston": "^1.1.0"
     },
+    "engines": {
+        "node": ">=4.2.0"
+    },
     "private": true
 }
