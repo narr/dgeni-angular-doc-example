@@ -15,16 +15,15 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   # open FireFox @
 
-  - grunt build
-  - grunt server:dist &
-  - sleep 3 # give it some time to start
-
 script:
+  - grunt build
+  - grunt server:dist & # run a command in the background by appending '&'
+  - sleep 3 # give a server some time for it to start
   - grunt e2e:firefox
 
 # Note that pull request builds skip deployment step altogether.
 before_deploy:
-  - cd ../dist_ng_doc
+  - cd ../dist_ng_doc # a directory that will be deployed
 
 deploy:
   provider: heroku
