@@ -14,8 +14,7 @@ module.exports = function(grunt) {
     require('jit-grunt')(grunt, {
         ngtemplates: 'grunt-angular-templates',
         useminPrepare: 'grunt-usemin',
-        protractor: 'grunt-protractor-runner',
-        buildcontrol: 'grunt-build-control'
+        protractor: 'grunt-protractor-runner'
     });
 
     // Time how long tasks take. Can help when optimizing build times
@@ -78,8 +77,7 @@ module.exports = function(grunt) {
         uglify: getConfig('uglify'),
         filerev: getConfig('filerev'),
         htmlmin: getConfig('htmlmin'),
-        protractor: getConfig('protractor'),
-        buildcontrol: getConfig('buildcontrol')
+        protractor: getConfig('protractor')
     });
 
     // @ Task
@@ -199,6 +197,7 @@ module.exports = function(grunt) {
         'setUsemin:distExamples',
         'usemin',
         'htmlmin:dist',
+        'copy:addDefer',
         'copy:distServer',
         'shell:installDistDep'
     ]);
@@ -219,6 +218,6 @@ module.exports = function(grunt) {
         }
     });
 
-    // buildcontrol, google insight to check webpage spped
+    // google insight to check webpage spped
     // Task @
 };

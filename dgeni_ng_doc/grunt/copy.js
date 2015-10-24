@@ -67,6 +67,15 @@ module.exports = function(options) {
             src: '**/*',
             dest: '<%= prodPath %>/client/examples'
         },
+        addDefer: {
+            options: {
+                process: function(content, srcpath) {
+                    return content.replace(/<script src/g, '<script defer src');
+                }
+            },
+            src: '<%= prodPath %>/client/index.html',
+            dest: '<%= prodPath %>/client/index.html'
+        },
         distServer: {
             files: [
                 {
