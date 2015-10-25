@@ -64,4 +64,3 @@ Run browserSync, and serve `build:docs` task's result.
 
 ### Other tasks
 And you can also use gulp tasks [generator-gulp-angular](https://github.com/Swiip/generator-gulp-angular).
-
