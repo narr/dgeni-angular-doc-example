@@ -22,6 +22,7 @@ grunt build
 cd dgeni_ng_doc
 grunt server:target
 ```
+Check out <http://localhost:8888> on a browser.
 
 ### Ng Doc
 *Execute below after build*
@@ -29,3 +30,4 @@ grunt server:target
 cd dgeni_ng_doc
 grunt server:dist
 ```
+Check out <http://localhost:8080> on a browser.
