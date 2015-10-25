@@ -1,4 +1,4 @@
-describe('Home', function() {
+describe('/', function() {
     'use strict';
 
     beforeEach(function() {
@@ -20,16 +20,5 @@ describe('Home', function() {
         // });
         expect(h3TagNum).toBe(aTagNum);
         expect(aTagNum).toBe(2);
-    });
-});
-
-describe('api/dgeniNgDocTarget/directive/awesome', function() {
-    'use strict';
-
-    it('should have an example', function() {
-        var exampleEl;
-        browser.get('http://localhost:8080/api/dgeniNgDocTarget/directive/awesome');
-        exampleEl = element.all(by.css('iframe.runnable-example-frame'));
-        expect(exampleEl.count()).toBe(1);
     });
 });
