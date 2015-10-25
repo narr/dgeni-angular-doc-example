@@ -16,7 +16,7 @@ module.exports = function() {
                 removeStyleLinkTypeAttributes: true
             }
         },
-        docApp: {
+        tmp: {
             // This will store the template URL as {app,components}/**/*.html
             cwd: 'client/.tmp',
             src: [

@@ -13,6 +13,12 @@ module.exports = function() {
                 force: true
             },
             src: '<%= prodPath %>'
+        },
+        buildCss: {
+            options: {
+                force: true
+            },
+            src: '<%= prodPath %>/client/css'
         }
     };
 };

@@ -67,10 +67,11 @@ module.exports = function(options) {
             src: '**/*',
             dest: '<%= prodPath %>/client/examples'
         },
-        addDefer: {
+        distIdxReplaceStr: {
             options: {
                 process: function(content, srcpath) {
-                    return content.replace(/<script src/g, '<script defer src');
+                    // sourceMap and defer
+                    return content.replace(/\/\*#.*?\.css\.map/g, '/*').replace(/<script src/g, '<script defer src');
                 }
             },
             src: '<%= prodPath %>/client/index.html',

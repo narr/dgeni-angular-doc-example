@@ -76,6 +76,7 @@ module.exports = function(grunt) {
         ngAnnotate: getConfig('ngAnnotate'),
         uglify: getConfig('uglify'),
         filerev: getConfig('filerev'),
+        inline: getConfig('inline'),
         htmlmin: getConfig('htmlmin'),
         protractor: getConfig('protractor')
     });
@@ -148,7 +149,7 @@ module.exports = function(grunt) {
         });
     });
     grunt.registerTask('doTemplates', [
-        'copy:templates', 'ngtemplates:docApp'
+        'copy:templates', 'ngtemplates:tmp'
     ]);
     grunt.registerTask('doExamples', [
         'copy:examplesCommonLibs', 'concat:examplesCommonModule'
@@ -196,8 +197,10 @@ module.exports = function(grunt) {
         'filerev:distExamples',
         'setUsemin:distExamples',
         'usemin',
+        'inline:dist', // look for '__inline' String
+        'clean:buildCss',
         'htmlmin:dist',
-        'copy:addDefer',
+        'copy:distIdxReplaceStr',
         'copy:distServer',
         'shell:installDistDep'
     ]);
@@ -217,7 +220,5 @@ module.exports = function(grunt) {
             grunt.task.run('shell:runDistServer');
         }
     });
-
-    // google insight to check webpage spped
     // Task @
 };
