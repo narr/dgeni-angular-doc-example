@@ -2,7 +2,7 @@
 the <div> is HTML and wrap each line in a <p> - thus breaking the HTML #}
 
 
-<div class="runnable-example" path="{$ doc.example.deployments.default.path $}"
+<div class="runnable-example" data-path="{$ doc.example.deployments.default.path $}"
     {% for attrName, attrValue in doc.example.attributes %}{% if attrValue != "null" %} {$ attrName $}="{$ attrValue $}"{% endif %}{% endfor %}>
     <uib-tabset>{% for fileName, file in doc.example.files %}
         <uib-tab heading="{$ file.name $}">

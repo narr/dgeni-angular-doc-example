@@ -145,7 +145,12 @@ module.exports = function(grunt) {
         });
         done = this.async();
         dgeni.generate().then(function() {
-            done();
+            // Sometimes the example htmls are not generated yet when this callback is called
+            // and it causes ngtemplates to miss the example htmls into templetes.js.
+            // So give it some times by setTimeout.
+            setTimeout(function() {
+                done();
+            }, 1000);
         });
     });
     grunt.registerTask('doTemplates', [

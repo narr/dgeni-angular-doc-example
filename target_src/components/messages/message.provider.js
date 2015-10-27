@@ -31,9 +31,9 @@ angular.module('dgeniNgDocTarget').provider('message', function messageProvider(
      * @description
      * This service provides messages to your app.
      * @example
-     <example module="messageExample" deps="null" animate="false">
+     <example data-module="messageExample" deps="null">
          <file name="index.html">
-             <div ng-controller="ExampleController as example">
+             <div data-ng-controller="ExampleController as example">
                  messages: {{example.msg}}
              </div>
          </file>

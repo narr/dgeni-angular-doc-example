@@ -31,3 +31,10 @@ cd dgeni_ng_doc
 grunt server:dist
 ```
 Check out <http://localhost:8080> on a browser.
+
+## Test
+*Make sure that the Ng Doc server(server:dist) is running before test*
+```sh
+cd dgeni_ng_doc
+grunt e2e
+```

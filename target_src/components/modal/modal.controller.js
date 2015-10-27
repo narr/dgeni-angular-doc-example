@@ -1,5 +1,5 @@
 angular.module('dgeniNgDocTarget')
-    .controller('ModalCtrl', function($modalInstance) {
+    .controller('ModalCtrl', function($uibModalInstance) {
         'use strict';
 
         var that = this;
@@ -8,9 +8,9 @@ angular.module('dgeniNgDocTarget')
             item: that.items[0]
         };
         that.ok = function() {
-            $modalInstance.close(that.selected.item);
+            $uibModalInstance.close(that.selected.item);
         };
         that.cancel = function() {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     });

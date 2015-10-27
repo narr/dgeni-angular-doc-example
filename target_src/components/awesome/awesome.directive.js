@@ -6,10 +6,10 @@
  * @description
  * It is an awesome directive.
  * @example
-<example module="awesomeExample" deps="null" animate="false">
+<example data-module="awesomeExample" deps="null">
     <file name="index.html">
-        <div ng-controller="ExampleController as example">
-            <div awesome></div>
+        <div data-ng-controller="ExampleController as example">
+            <div data-awesome></div>
         </div>
     </file>
     <file name="script.js">
