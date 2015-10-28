@@ -28,6 +28,7 @@ module.exports = function(config) {
         plugins: [
             'karma-jasmine',
             'karma-phantomjs-launcher',
+            'karma-spec-reporter',
             'karma-coverage'
         ],
         preprocessors: {
@@ -44,7 +45,7 @@ module.exports = function(config) {
             'app/main/main.controller.js': 'coverage',
             '.tmp/templates.js': 'coverage'
         },
-        reporters: ['progress', 'coverage'],
+        reporters: ['spec', 'coverage'],
         singleRun: true,
 
         // optionally, configure the reporter
