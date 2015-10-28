@@ -13,6 +13,7 @@ Check out <http://dgeni-ng-doc-example.herokuapp.com>
 Make a Ng Doc from the target Angular App.
 ```sh
 cd dgeni_ng_doc
+npm install
 grunt build
 ```
 
