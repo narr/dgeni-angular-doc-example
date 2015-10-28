@@ -26,11 +26,11 @@ module.exports = function() {
         },
         jasmine: {
             files: 'client/{app,components}/**/*.js',
-            tasks: 'karma:client'
+            tasks: 'shell:karma'
         },
         mocha: {
             files: 'server/**/*.js',
-            tasks: 'doMochaTest'
+            tasks: 'mocha'
         }
     };
 };

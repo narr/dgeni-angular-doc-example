@@ -24,9 +24,7 @@ module.exports = function(options) {
             ].join('&&')
         },
         karma: {
-            command: [
-                'node_modules/karma/bin/karma start test/karma.conf.js'
-            ].join('&&')
+            command: 'node_modules/karma/bin/karma start test/karma.conf.js'
         },
         installDistDep: {
             command: [

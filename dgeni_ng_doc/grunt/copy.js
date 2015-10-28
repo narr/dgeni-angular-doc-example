@@ -36,7 +36,6 @@ module.exports = function(options) {
             },
             src: 'client/index.html',
             dest: '<%= prodPath %>/client/index.html'
-
         },
         distAssets: {
             files: [
