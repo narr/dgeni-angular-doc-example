@@ -35,7 +35,7 @@ module.exports = function(options) {
         runDistServer: {
             command: [
                 'cd <%= prodPath %>',
-                'export PORT=8080',
+                // 'export PORT=8080',
                 'node server/server'
             ].join('&&')
         }

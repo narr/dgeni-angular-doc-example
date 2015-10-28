@@ -79,6 +79,17 @@ module.exports = function(options) {
             dest: '<%= prodPath %>/client/index.html'
         },
         distServer: {
+            options: {
+                process: function(content, srcpath) {
+                    if (srcpath === 'server/server.js') {
+                        // change the port
+                        return content.replace(/3000/g, 8080);
+                    }
+                    else {
+                        return content;
+                    }
+                }
+            },
             files: [
                 {
                     '<%= prodPath %>/package.json': 'dist_package.json'
