@@ -10,7 +10,7 @@ Check out <http://dgeni-ng-doc-example.herokuapp.com>
 [![Home Screen Shot](https://raw.githubusercontent.com/Narr-/dgeni-angular-doc-example/master/screenshots/home.jpg "Home")](http://dgeni-ng-doc-example.herokuapp.com)
 
 ## Install
-Install node moduels
+Install node modules
 ```sh
 cd dgeni_ng_doc
 npm install
