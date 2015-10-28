@@ -33,8 +33,8 @@ module.exports = function() {
                                             var generated = context.options.generated;
                                             generated.options = {
                                                 sourceMap: true,
-                                                sourceMapIncludeSources: true,
-                                                preserveComments: 'some'
+                                                sourceMapIncludeSources: true
+                                                // preserveComments: 'some'
                                             };
                                         }
                                     }
