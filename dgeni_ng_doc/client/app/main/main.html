@@ -1,23 +1,23 @@
-<div class="main container" ng-controller="MainController as main">
-    <div class="header" ng-include="'components/navbar/navbar.html'"></div>
+<div class="main container" data-ng-controller="MainController as main">
+    <div class="header" data-ng-include="'components/navbar/navbar.html'"></div>
 
     <div class="row">
-        <div class="col-md-12" ng-if="!main.currentArea" ng-include="main.partialPath"></div>
+        <div class="col-md-12" data-ng-if="!main.currentArea" data-ng-include="main.partialPath"></div>
 
-        <div class="col-md-3" ng-if="main.currentArea">
+        <div class="col-md-3" data-ng-if="main.currentArea">
             <ul class="naked-list">
-                <li ng-repeat="navGroup in main.currentArea.navGroups" class="nav-index-group">
-                    <a class="nav-index-group-heading" ng-href="{{navGroup.href}}"><span>{{navGroup.name}}</span></a>
+                <li data-ng-repeat="navGroup in main.currentArea.navGroups" class="nav-index-group">
+                    <a class="nav-index-group-heading" data-ng-href="{{navGroup.href}}"><span>{{navGroup.name}}</span></a>
                     <ul>
-                        <li ng-repeat="navItem in navGroup.navItems" ng-class="main.navState(navItem)" class="nav-index-listing">
-                            <a ng-href="{{navItem.href}}"><span>{{navItem.name}}</span></a>
+                        <li data-ng-repeat="navItem in navGroup.navItems" data-ng-class="main.navState(navItem)" class="nav-index-listing">
+                            <a data-ng-href="{{navItem.href}}"><span>{{navItem.name}}</span></a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
 
-        <div class="col-md-9" ng-if="main.currentArea" ng-include="main.partialPath"></div>
+        <div class="col-md-9" data-ng-if="main.currentArea" data-ng-include="main.partialPath"></div>
     </div>
 
     <hr>
