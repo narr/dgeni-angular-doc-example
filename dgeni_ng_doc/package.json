@@ -10,7 +10,7 @@
         "express": "^4.13.3"
     },
     "devDependencies": {
-        "blanket": "^1.1.9",
+        "blanket": "^1.2.2",
         "chai": "^3.4.0",
         "dgeni": "^0.4.1",
         "dgeni-packages": "^0.10.19",
