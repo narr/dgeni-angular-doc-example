@@ -1,5 +1,5 @@
 # dgeni-angular-doc-example
-[![Build Status](https://travis-ci.org/Narr-/dgeni-angular-doc-example.svg?branch=master)](https://travis-ci.org/Narr-/dgeni-angular-doc-example)
+[![Build Status](https://travis-ci.org/narr/dgeni-angular-doc-example.svg?branch=master)](https://travis-ci.org/narr/dgeni-angular-doc-example)
 
 An example of Dgeni ngdoc package.
 
