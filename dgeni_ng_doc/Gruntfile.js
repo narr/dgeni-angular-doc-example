@@ -135,7 +135,7 @@ module.exports = function(grunt) {
             },
             git: {
                 info: {
-                    owner: 'Narr-',
+                    owner: 'narr',
                     repo: 'dgeni-angular-doc-example'
                 }
             },

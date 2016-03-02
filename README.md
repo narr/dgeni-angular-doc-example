@@ -7,7 +7,7 @@ Simply a Grunt version of <https://github.com/Quramy/dgeni-ngdocs-example>
 
 Check out <http://dgeni-ng-doc-example.herokuapp.com>
 <br><br><br>
-[![Home Screen Shot](https://raw.githubusercontent.com/Narr-/dgeni-angular-doc-example/master/screenshots/home.jpg "Home")](http://dgeni-ng-doc-example.herokuapp.com)
+[![Home Screen Shot](https://raw.githubusercontent.com/narr/dgeni-angular-doc-example/master/screenshots/home.jpg "Home")](http://dgeni-ng-doc-example.herokuapp.com)
 
 ## Install
 Install node modules

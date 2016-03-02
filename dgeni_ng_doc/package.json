@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Narr-/dgeni-angular-doc-example.git"
+        "url": "https://github.com/narr/dgeni-angular-doc-example.git"
     },
     "dependencies": {
         "compression": "^1.6.0",
